@@ -1,7 +1,5 @@
-"use client";
-
 import { useState, CSSProperties } from "react";
-import { SearchBar } from "@/components/SearchBar";
+import { SearchBar } from "./components/SearchBar";
 
 // =============================================================================
 // Page Styles
@@ -10,6 +8,9 @@ const pageContainerStyles: CSSProperties = {
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
+  margin: 0,
+  padding: 0,
+  fontFamily: "system-ui, -apple-system, sans-serif",
 };
 
 // Top 50% with background image
@@ -43,8 +44,7 @@ const contentStyles: CSSProperties = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  paddingLeft: "24px",
-  paddingRight: "24px",
+  padding: "0 24px",
   width: "100%",
 };
 
@@ -81,15 +81,11 @@ const bottomSectionStyles: CSSProperties = {
   alignItems: "center",
   justifyContent: "flex-start",
   paddingTop: "48px",
-  paddingLeft: "24px",
-  paddingRight: "24px",
+  padding: "48px 24px",
 };
 
 const feedbackStyles: CSSProperties = {
-  paddingTop: "16px",
-  paddingBottom: "16px",
-  paddingLeft: "24px",
-  paddingRight: "24px",
+  padding: "16px 24px",
   backgroundColor: "#eff6ff",
   borderWidth: "1px",
   borderStyle: "solid",
@@ -105,9 +101,9 @@ const placeholderTextStyles: CSSProperties = {
 };
 
 // =============================================================================
-// Page Component
+// App Component
 // =============================================================================
-export default function Home() {
+function App() {
   const [submittedQuery, setSubmittedQuery] = useState("");
 
   const handleSearch = (query: string) => {
@@ -121,9 +117,7 @@ export default function Home() {
       <div style={topSectionStyles}>
         <div style={overlayStyles} />
         <div style={contentStyles}>
-          <h1 style={headingStyles}>
-            MODEL SHARING APP
-          </h1>
+          <h1 style={headingStyles}>MODEL SHARING APP</h1>
           <p style={subtitleStyles}>
             Search and discover 3D models, textures, and assets
           </p>
@@ -145,15 +139,15 @@ export default function Home() {
         {submittedQuery ? (
           <div style={feedbackStyles}>
             <p>
-              Searching for: <strong>&quot;{submittedQuery}&quot;</strong>
+              Searching for: <strong>"{submittedQuery}"</strong>
             </p>
           </div>
         ) : (
-          <p style={placeholderTextStyles}>
-            Search results will appear here...
-          </p>
+          <p style={placeholderTextStyles}>Search results will appear here...</p>
         )}
       </div>
     </div>
   );
 }
+
+export default App;
