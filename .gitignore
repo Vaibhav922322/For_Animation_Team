@@ -1,0 +1,7 @@
+**\node_modules
+frontend/eslint.config.mjs
+frontend/next-env.d.ts
+frontend/next.config.ts
+frontend/postcss.config.mjs
+frontend/next.config.ts
+frontend/tsconfig.json
