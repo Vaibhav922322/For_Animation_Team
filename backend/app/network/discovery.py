@@ -3,6 +3,7 @@ import ipaddress
 import psutil
 from typing import List, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from model.globalData import GlobalData
 
 class NetworkDiscovery:
     def get_local_ip():
@@ -71,6 +72,8 @@ class NetworkDiscovery:
                     ip_str, open_ok, hostname = fut.result()
                     if open_ok:
                         hosts.append({"ip": ip_str, "hostname": hostname})
+                        GlobalData.author_to_ip[hostname] = ip_str
+                        GlobalData.ip_to_author[ip_str] = hostname
                 except Exception:
                     # Ignore individual probe errors; treat them as "closed"
                     continue

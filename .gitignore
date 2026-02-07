@@ -13,3 +13,4 @@ backend/backend_env
 **\.env
 *.log
 **\__pycache__
+backend/app/smb_discovered_files.txt

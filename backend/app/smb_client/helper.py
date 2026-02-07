@@ -2,6 +2,8 @@ from smb.SMBConnection import SMBConnection
 from typing import List
 from smb.base import NotReadyError, SMBTimeout
 from fastapi import HTTPException
+from model.fileMetaData import FileMetadata
+from model.globalData import GlobalData
 
 class SMBHelper:
     def list_shares(conn: SMBConnection) -> List[str]:
@@ -13,13 +15,16 @@ class SMBHelper:
             shares.append(s.name)
         return shares
 
-    def walk_share(conn: SMBConnection, share: str, start_path: str = "/", max_depth: int = 1):
+    def walk_share(conn: SMBConnection, share: str, start_path: str = "/", max_depth: int = 1) -> List[FileMetadata]:
         """
         Recursively lists files/folders up to max_depth to avoid huge scans.
+        Returns a list of discovered file paths (formatted strings).
         """
-        def _walk(path: str, depth: int):
+        results = []
+        def _walk(path: str, depth: int) -> int:
+            total_size_bytes = 0
             if depth > max_depth:
-                return
+                return 0
             try:
                 for f in conn.listPath(share, path):
                     name = f.filename
@@ -27,15 +32,41 @@ class SMBHelper:
                         continue
 
                     full = (path.rstrip("/") + "/" + name).replace("//", "/")
+                    
+                    # Create FileMetadata object
+                    is_file = not f.isDirectory
+                    full_unc_path = f"\\\\{GlobalData.ip_to_author.get(conn.remote_name)}\\{share}{full}"
+                    
+                    metadata = FileMetadata(
+                        full_unc_path=full_unc_path,
+                        file_path=full,
+                        file_name=name,
+                        shared_folder_name=share,
+                        file_size=f.file_size,
+                        is_file=is_file,
+                        host= GlobalData.ip_to_author.get(conn.remote_name)
+                    )
+
                     if f.isDirectory:
-                        print(f"[DIR ] \\\\{conn.remote_name}\\{share}{full}")
-                        _walk(full, depth + 1)
+                        print(f"[DIR ] {full_unc_path}")
+                        results.append(metadata)
+                        # Recurse and add content size
+                        content_size = _walk(full, depth + 1)
+                        # Update folder size with its content size
+                        metadata.file_size = content_size
+                        total_size_bytes += content_size
                     else:
-                        print(f"[FILE] \\\\{conn.remote_name}\\{share}{full}  ({f.file_size} bytes)")
+                        print(f"[FILE] {full_unc_path}  ({f.file_size} bytes)")
+                        results.append(metadata)
+                        total_size_bytes += f.file_size
+                        
             except (NotReadyError, SMBTimeout, Exception) as e:
                 print(f"  ! Could not read {share}:{path} -> {e}")
+            
+            return total_size_bytes
 
         _walk(start_path, 0)
+        return results
 
     def smb_list_recursive(conn: SMBConnection, share: str, base_path: str):
         stack = [base_path.rstrip("/") or "/"]
@@ -44,27 +75,6 @@ class SMBHelper:
             try:
                 entries = conn.listPath(share, current)
             except Exception as e:
-                # region agent log
-                try:
-                    with open(r"c:\Users\vaibhav_admin\Desktop\AppCode\For_Animation_Team\Models_Share_karne_wala_app\Share Models\.cursor\debug.log", "a", encoding="utf-8") as _f:
-                        import json, time
-                        _f.write(
-                            json.dumps(
-                                {
-                                    "sessionId": "debug-session",
-                                    "runId": "initial",
-                                    "hypothesisId": "H2",
-                                    "location": "testConnection.py:smb_list_recursive",
-                                    "message": "Error listing SMB path",
-                                    "data": {"share": share, "current": current, "error": str(e)},
-                                    "timestamp": int(time.time() * 1000),
-                                }
-                            )
-                            + "\n"
-                        )
-                except Exception:
-                    pass
-                # endregion
                 raise HTTPException(status_code=403, detail=f"Cannot list SMB path {current}: {e}")
 
             for e in entries:

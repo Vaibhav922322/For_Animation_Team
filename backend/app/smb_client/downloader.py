@@ -18,29 +18,6 @@ class SBMDownloader:
         conn = SMBConnector.get_smb_connection(host=host, username=username, password=password, domain=domain)
         try:
             folder_path = folder_path.rstrip("/") or "/"
-
-            # region agent log
-            try:
-                with open(r"c:\Users\vaibhav_admin\Desktop\AppCode\For_Animation_Team\Models_Share_karne_wala_app\Share Models\.cursor\debug.log", "a", encoding="utf-8") as _f:
-                    import json, time
-                    _f.write(
-                        json.dumps(
-                            {
-                                "sessionId": "debug-session",
-                                "runId": "initial",
-                                "hypothesisId": "H1",
-                                "location": "testConnection.py:smb_zip_to_tempfile",
-                                "message": "Starting SMB zip to tempfile",
-                                "data": {"host": host, "share": share, "folder_path": folder_path},
-                                "timestamp": int(time.time() * 1000),
-                            }
-                        )
-                        + "\n"
-                    )
-            except Exception:
-                pass
-            # endregion
-
             fd, zip_path = tempfile.mkstemp(prefix="smb_", suffix=".zip")
             os.close(fd)
 
