@@ -6,6 +6,7 @@ import FilterBar, { type FilterType, type SortType } from "./components/FilterBa
 import type { Asset } from "./components/AssetCard";
 import SplitText from "./components/SplitText";
 import ShinyText from "./components/ShinyText";
+import Antigravity from "./components/Antigravity";
 
 const mockAssets: Asset[] = [
   { id: "1", name: "Character_Warrior_3D.fbx", type: "model", size: "24.5 MB", date: "Feb 5, 2026" },
@@ -22,6 +23,17 @@ const mockAssets: Asset[] = [
   { id: "12", name: "Animation_Idle.fbx", type: "animation", size: "3.1 MB", date: "Jan 25, 2026" },
 ];
 
+const backgroundStyles: CSSProperties = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  zIndex: 0,
+  pointerEvents: "auto",
+  
+};
+
 const pageContainerStyles: CSSProperties = {
   minHeight: "100vh",
   display: "flex",
@@ -29,6 +41,8 @@ const pageContainerStyles: CSSProperties = {
   margin: 0,
   padding: 0,
   fontFamily: "system-ui, -apple-system, sans-serif",
+  position: "relative",
+  zIndex: 1,
 };
 
 const topSectionStyles: CSSProperties = {
@@ -92,7 +106,7 @@ const searchContainerStyles: CSSProperties = {
 
 const bottomSectionStyles: CSSProperties = {
   flex: 1,
-  backgroundColor: "#ffffff",
+  backgroundColor: "rgba(255, 255, 255, 0.95)",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -165,76 +179,100 @@ function App() {
   const showResults = searchQuery.trim() || activeFilter !== "all";
 
   return (
-    <div style={pageContainerStyles}>
-      <div style={topSectionStyles}>
-        <div style={overlayStyles} />
-        <div style={contentStyles}>
-          <SplitText
-            text="MODEL SHARING APP"
-            style={headingStyles}
-            delay={50}
-            duration={0.8}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-50px"
-            textAlign="center"
-          />
-          <p style={subtitleStyles}>
-            <ShinyText
-              text="Search and discover 3D models, textures, and assets"
-              speed={3}
-              delay={0.5}
-              color="rgba(255, 255, 255, 0.7)"
-              shineColor="#ffffff"
-              spread={120}
-              direction="left"
+    <>
+      {/* Antigravity Background */}
+      <div style={backgroundStyles}>
+        <Antigravity
+          count={300}
+          magnetRadius={6}
+          ringRadius={7}
+          waveSpeed={0.4}
+          waveAmplitude={1}
+          particleSize={1.5}
+          lerpSpeed={0.05}
+          color="#00008C"
+          autoAnimate
+          particleVariance={1}
+          rotationSpeed={0}
+          depthFactor={1}
+          pulseSpeed={3}
+          particleShape="capsule"
+          fieldStrength={10}
+        />
+      </div>
+
+      {/* Main Content */}
+      <div style={pageContainerStyles}>
+        <div style={topSectionStyles}>
+          <div style={overlayStyles} />
+          <div style={contentStyles}>
+            <SplitText
+              text="MODEL SHARING APP"
+              style={headingStyles}
+              delay={50}
+              duration={0.8}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-50px"
+              textAlign="center"
             />
-          </p>
-          <div style={searchContainerStyles}>
-            <SearchBar.Root onSearch={handleSearch}>
-              <SearchBar.Icon />
-              <SearchBar.Input placeholder="Search for models, textures..." />
-              <SearchBar.Clear />
-              <SearchBar.Button>Go</SearchBar.Button>
-            </SearchBar.Root>
+            <p style={subtitleStyles}>
+              <ShinyText
+                text="Search and discover 3D models, textures, and assets"
+                speed={3}
+                delay={0.5}
+                color="rgba(255, 255, 255, 0.7)"
+                shineColor="#ffffff"
+                spread={120}
+                direction="left"
+              />
+            </p>
+            <div style={searchContainerStyles}>
+              <SearchBar.Root onSearch={handleSearch}>
+                <SearchBar.Icon />
+                <SearchBar.Input placeholder="Search for models, textures..." />
+                <SearchBar.Clear />
+                <SearchBar.Button>Go</SearchBar.Button>
+              </SearchBar.Root>
+            </div>
           </div>
         </div>
+        <div style={bottomSectionStyles}>
+          {showResults ? (
+            <>
+              <h2 style={resultsTitleStyles}>
+                {searchQuery ? "Results for \"" + searchQuery + "\"" : "Browse Assets"}
+              </h2>
+              <FilterBar
+                activeFilter={activeFilter}
+                activeSort={activeSort}
+                onFilterChange={setActiveFilter}
+                onSortChange={setActiveSort}
+                resultCount={filteredAssets.length}
+              />
+              <AssetGrid
+                assets={filteredAssets}
+                onAssetClick={handleAssetClick}
+                onAssetDownload={handleAssetDownload}
+              />
+            </>
+          ) : (
+            <p style={placeholderTextStyles}>
+              Search for assets or use the filters to browse
+            </p>
+          )}
+        </div>
+        <AssetModal
+          asset={selectedAsset}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onDownload={handleAssetDownload}
+        />
       </div>
-      <div style={bottomSectionStyles}>
-        {showResults ? (
-          <>
-            <h2 style={resultsTitleStyles}>
-              {searchQuery ? "Results for \"" + searchQuery + "\"" : "Browse Assets"}
-            </h2>
-            <FilterBar
-              activeFilter={activeFilter}
-              activeSort={activeSort}
-              onFilterChange={setActiveFilter}
-              onSortChange={setActiveSort}
-              resultCount={filteredAssets.length}
-            />
-            <AssetGrid
-              assets={filteredAssets}
-              onAssetClick={handleAssetClick}
-              onAssetDownload={handleAssetDownload}
-            />
-          </>
-        ) : (
-          <p style={placeholderTextStyles}>
-            Search for assets or use the filters to browse
-          </p>
-        )}
-      </div>
-      <AssetModal
-        asset={selectedAsset}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onDownload={handleAssetDownload}
-      />
-    </div>
+    </>
   );
 }
 
