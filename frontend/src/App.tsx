@@ -1,9 +1,27 @@
-import { useState, CSSProperties } from "react";
+import { useState, useMemo, type CSSProperties } from "react";
 import { SearchBar } from "./components/SearchBar";
+import AssetGrid from "./components/AssetGrid";
+import AssetModal from "./components/AssetModal";
+import FilterBar, { type FilterType, type SortType } from "./components/FilterBar";
+import type { Asset } from "./components/AssetCard";
+import SplitText from "./components/SplitText";
+import ShinyText from "./components/ShinyText";
 
-// =============================================================================
-// Page Styles
-// =============================================================================
+const mockAssets: Asset[] = [
+  { id: "1", name: "Character_Warrior_3D.fbx", type: "model", size: "24.5 MB", date: "Feb 5, 2026" },
+  { id: "2", name: "Environment_Forest.blend", type: "model", size: "156 MB", date: "Feb 4, 2026" },
+  { id: "3", name: "Texture_Wood_4K.png", type: "texture", size: "12.8 MB", date: "Feb 3, 2026" },
+  { id: "4", name: "Animation_Walk_Cycle.fbx", type: "animation", size: "8.2 MB", date: "Feb 2, 2026" },
+  { id: "5", name: "Character_Wizard_Rigged.fbx", type: "model", size: "32.1 MB", date: "Feb 1, 2026" },
+  { id: "6", name: "Prop_Sword_Detailed.obj", type: "model", size: "5.4 MB", date: "Jan 31, 2026" },
+  { id: "7", name: "Environment_Castle.blend", type: "model", size: "245 MB", date: "Jan 30, 2026" },
+  { id: "8", name: "Texture_Stone_PBR.png", type: "texture", size: "18.6 MB", date: "Jan 29, 2026" },
+  { id: "9", name: "Animation_Run_Cycle.fbx", type: "animation", size: "6.8 MB", date: "Jan 28, 2026" },
+  { id: "10", name: "Character_Dragon.fbx", type: "model", size: "89.3 MB", date: "Jan 27, 2026" },
+  { id: "11", name: "Texture_Metal_Rust.png", type: "texture", size: "15.2 MB", date: "Jan 26, 2026" },
+  { id: "12", name: "Animation_Idle.fbx", type: "animation", size: "3.1 MB", date: "Jan 25, 2026" },
+];
+
 const pageContainerStyles: CSSProperties = {
   minHeight: "100vh",
   display: "flex",
@@ -13,9 +31,9 @@ const pageContainerStyles: CSSProperties = {
   fontFamily: "system-ui, -apple-system, sans-serif",
 };
 
-// Top 50% with background image
 const topSectionStyles: CSSProperties = {
-  height: "50vh",
+  height: "45vh",
+  minHeight: "350px",
   backgroundImage: "url('/Gemini_Generated_Image_6acyq46acyq46acy.png')",
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -25,19 +43,19 @@ const topSectionStyles: CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
   position: "relative",
+  borderRadius: "0 0 40px 40px",
+  overflow: "hidden",
 };
 
-// Overlay for better text readability
 const overlayStyles: CSSProperties = {
   position: "absolute",
   top: 0,
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: "rgba(0, 0, 0, 0.4)",
+  backgroundColor: "rgba(0, 0, 0, 0.6)",
 };
 
-// Content on top of overlay
 const contentStyles: CSSProperties = {
   position: "relative",
   zIndex: 10,
@@ -72,26 +90,24 @@ const searchContainerStyles: CSSProperties = {
   justifyContent: "center",
 };
 
-// Bottom 50% white section
 const bottomSectionStyles: CSSProperties = {
-  height: "50vh",
+  flex: 1,
   backgroundColor: "#ffffff",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  justifyContent: "flex-start",
   paddingTop: "48px",
-  padding: "48px 24px",
+  paddingBottom: "48px",
+  paddingLeft: "24px",
+  paddingRight: "24px",
 };
 
-const feedbackStyles: CSSProperties = {
-  padding: "16px 24px",
-  backgroundColor: "#eff6ff",
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: "#bfdbfe",
-  borderRadius: "12px",
-  color: "#1e40af",
+const resultsTitleStyles: CSSProperties = {
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#1e293b",
+  marginBottom: "24px",
+  textAlign: "center",
 };
 
 const placeholderTextStyles: CSSProperties = {
@@ -100,29 +116,83 @@ const placeholderTextStyles: CSSProperties = {
   textAlign: "center",
 };
 
-// =============================================================================
-// App Component
-// =============================================================================
 function App() {
-  const [submittedQuery, setSubmittedQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+  const [activeSort, setActiveSort] = useState<SortType>("name-asc");
+  const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const filteredAssets = useMemo(() => {
+    let results = [...mockAssets];
+    if (searchQuery.trim()) {
+      results = results.filter((asset) =>
+        asset.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    if (activeFilter !== "all") {
+      results = results.filter((asset) => asset.type === activeFilter);
+    }
+    results.sort((a, b) => {
+      switch (activeSort) {
+        case "name-asc": return a.name.localeCompare(b.name);
+        case "name-desc": return b.name.localeCompare(a.name);
+        case "type": return a.type.localeCompare(b.type);
+        default: return 0;
+      }
+    });
+    return results;
+  }, [searchQuery, activeFilter, activeSort]);
 
   const handleSearch = (query: string) => {
-    setSubmittedQuery(query);
-    console.log("🔍 Searching for:", query);
+    setSearchQuery(query);
   };
+
+  const handleAssetClick = (asset: Asset) => {
+    setSelectedAsset(asset);
+    setIsModalOpen(true);
+  };
+
+  const handleAssetDownload = (asset: Asset) => {
+    alert("Downloading: " + asset.name);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedAsset(null);
+  };
+
+  const showResults = searchQuery.trim() || activeFilter !== "all";
 
   return (
     <div style={pageContainerStyles}>
-      {/* Top Section with Background Image */}
       <div style={topSectionStyles}>
         <div style={overlayStyles} />
         <div style={contentStyles}>
-          <h1 style={headingStyles}>MODEL SHARING APP</h1>
+          <SplitText
+            text="MODEL SHARING APP"
+            style={headingStyles}
+            delay={50}
+            duration={0.8}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-50px"
+            textAlign="center"
+          />
           <p style={subtitleStyles}>
-            Search and discover 3D models, textures, and assets
+            <ShinyText
+              text="Search and discover 3D models, textures, and assets"
+              speed={3}
+              delay={0.5}
+              color="rgba(255, 255, 255, 0.7)"
+              shineColor="#ffffff"
+              spread={120}
+              direction="left"
+            />
           </p>
-
-          {/* Search Bar */}
           <div style={searchContainerStyles}>
             <SearchBar.Root onSearch={handleSearch}>
               <SearchBar.Icon />
@@ -133,19 +203,37 @@ function App() {
           </div>
         </div>
       </div>
-
-      {/* Bottom Section with White Background */}
       <div style={bottomSectionStyles}>
-        {submittedQuery ? (
-          <div style={feedbackStyles}>
-            <p>
-              Searching for: <strong>"{submittedQuery}"</strong>
-            </p>
-          </div>
+        {showResults ? (
+          <>
+            <h2 style={resultsTitleStyles}>
+              {searchQuery ? "Results for \"" + searchQuery + "\"" : "Browse Assets"}
+            </h2>
+            <FilterBar
+              activeFilter={activeFilter}
+              activeSort={activeSort}
+              onFilterChange={setActiveFilter}
+              onSortChange={setActiveSort}
+              resultCount={filteredAssets.length}
+            />
+            <AssetGrid
+              assets={filteredAssets}
+              onAssetClick={handleAssetClick}
+              onAssetDownload={handleAssetDownload}
+            />
+          </>
         ) : (
-          <p style={placeholderTextStyles}>Search results will appear here...</p>
+          <p style={placeholderTextStyles}>
+            Search for assets or use the filters to browse
+          </p>
         )}
       </div>
+      <AssetModal
+        asset={selectedAsset}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onDownload={handleAssetDownload}
+      />
     </div>
   );
 }
