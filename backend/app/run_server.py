@@ -9,7 +9,7 @@ def save_server_connection(server_ip : str, port: int):
     }
 
     # Define your file path
-    server_connection_file_path = "..\\..\\server_connection.json"
+    server_connection_file_path = "..\\server_connection.json"
 
     with open(server_connection_file_path, "w") as json_file:
         json.dump(data, json_file, indent=4)
