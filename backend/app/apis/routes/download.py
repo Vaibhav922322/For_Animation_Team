@@ -24,18 +24,11 @@ def parseDownloadPath(downloadPath: str):
 
     return host, share, path
 
-@router.get("/")
-def smb_download(
-    host_ip: str,
-    shared_folder_name: str,
-    file_path: str,
-#   request: DownloadRequest
-):
+@router.past("/")
+def smb_download(request: DownloadRequest):
     # Host, share and target path for the SMB server.
     # NOTE: `path` can point either to a folder or a single file.
     
-    request = DownloadRequest(host_ip=host_ip, shared_folder_name=shared_folder_name, file_path=file_path)
-
     # Connect once and decide whether path is a file or folder
     if(Utility.is_null_or_white_space(request.file_path)):
         raise HTTPException(status_code=400, detail="Invalid file path")
