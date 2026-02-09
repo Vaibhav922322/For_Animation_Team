@@ -7,21 +7,33 @@ import type { Asset } from "./components/AssetCard";
 import SplitText from "./components/SplitText";
 import ShinyText from "./components/ShinyText";
 import Antigravity from "./components/Antigravity";
+import { findFiles, refreshFiles, downloadFile, type FileMetadata } from "./services/api";
 
-const mockAssets: Asset[] = [
-  { id: "1", name: "Character_Warrior_3D.fbx", type: "model", size: "24.5 MB", date: "Feb 5, 2026" },
-  { id: "2", name: "Environment_Forest.blend", type: "model", size: "156 MB", date: "Feb 4, 2026" },
-  { id: "3", name: "Texture_Wood_4K.png", type: "texture", size: "12.8 MB", date: "Feb 3, 2026" },
-  { id: "4", name: "Animation_Walk_Cycle.fbx", type: "animation", size: "8.2 MB", date: "Feb 2, 2026" },
-  { id: "5", name: "Character_Wizard_Rigged.fbx", type: "model", size: "32.1 MB", date: "Feb 1, 2026" },
-  { id: "6", name: "Prop_Sword_Detailed.obj", type: "model", size: "5.4 MB", date: "Jan 31, 2026" },
-  { id: "7", name: "Environment_Castle.blend", type: "model", size: "245 MB", date: "Jan 30, 2026" },
-  { id: "8", name: "Texture_Stone_PBR.png", type: "texture", size: "18.6 MB", date: "Jan 29, 2026" },
-  { id: "9", name: "Animation_Run_Cycle.fbx", type: "animation", size: "6.8 MB", date: "Jan 28, 2026" },
-  { id: "10", name: "Character_Dragon.fbx", type: "model", size: "89.3 MB", date: "Jan 27, 2026" },
-  { id: "11", name: "Texture_Metal_Rust.png", type: "texture", size: "15.2 MB", date: "Jan 26, 2026" },
-  { id: "12", name: "Animation_Idle.fbx", type: "animation", size: "3.1 MB", date: "Jan 25, 2026" },
-];
+// Helper to map API metadata to Asset interface
+const mapMetadataToAsset = (file: FileMetadata): Asset => {
+  const extension = file.file_name.split('.').pop()?.toLowerCase() || '';
+  let type: 'model' | 'texture' | 'animation' | 'other' = 'other';
+  
+  if (['fbx', 'obj', 'blend', 'gltf', 'glb'].includes(extension)) type = 'model';
+  else if (['png', 'jpg', 'jpeg', 'tga', 'tif', 'tiff'].includes(extension)) type = 'texture';
+  else if (['mp4', 'mov', 'avi'].includes(extension)) type = 'animation'; // Note: API might not return video files as animations, but 3D animations are usually FBX too.
+
+  // Format size
+  const sizeMB = (file.file_size / (1024 * 1024)).toFixed(1);
+  
+  return {
+    id: file.file_path, // Use path as unique ID
+    name: file.file_name,
+    type,
+    size: `${sizeMB} MB`,
+    date: "Unknown", // API doesn't provide date
+    // Store original metadata for download
+    host_ip: file.host_ip,
+    shared_folder_name: file.shared_folder_name,
+    file_path: file.file_path,
+  };
+};
+
 
 const backgroundStyles: CSSProperties = {
   position: "fixed",
@@ -31,7 +43,6 @@ const backgroundStyles: CSSProperties = {
   height: "100%",
   zIndex: 0,
   pointerEvents: "auto",
-  
 };
 
 const pageContainerStyles: CSSProperties = {
@@ -102,6 +113,32 @@ const searchContainerStyles: CSSProperties = {
   maxWidth: "672px",
   display: "flex",
   justifyContent: "center",
+  alignItems: "center",
+  gap: "12px",
+};
+
+const refreshButtonStyles: CSSProperties = {
+  padding: "12px 24px",
+  backgroundColor: "rgba(255, 255, 255, 0.2)",
+  backdropFilter: "blur(10px)",
+  borderRadius: "12px",
+  border: "1px solid rgba(255, 255, 255, 0.3)",
+  color: "white",
+  fontWeight: 600,
+  cursor: "pointer",
+  transition: "all 0.2s ease",
+  height: "48px",
+};
+
+const errorStyles: CSSProperties = {
+  color: "#ef4444",
+  backgroundColor: "#fee2e2",
+  padding: "12px",
+  borderRadius: "8px",
+  marginBottom: "16px",
+  textAlign: "center",
+  maxWidth: "600px",
+  width: "100%",
 };
 
 const bottomSectionStyles: CSSProperties = {
@@ -136,17 +173,18 @@ function App() {
   const [activeSort, setActiveSort] = useState<SortType>("name-asc");
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const [assets, setAssets] = useState<Asset[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const filteredAssets = useMemo(() => {
-    let results = [...mockAssets];
-    if (searchQuery.trim()) {
-      results = results.filter((asset) =>
-        asset.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
+    let results = [...assets];
+    // Filter by type
     if (activeFilter !== "all") {
       results = results.filter((asset) => asset.type === activeFilter);
     }
+    // Sort
     results.sort((a, b) => {
       switch (activeSort) {
         case "name-asc": return a.name.localeCompare(b.name);
@@ -156,10 +194,28 @@ function App() {
       }
     });
     return results;
-  }, [searchQuery, activeFilter, activeSort]);
+  }, [assets, activeFilter, activeSort]);
 
-  const handleSearch = (query: string) => {
+  const handleSearch = async (query: string) => {
     setSearchQuery(query);
+    if (!query.trim()) {
+      setAssets([]); // Clear results if query is empty
+      return;
+    }
+    
+    setIsLoading(true);
+    setError(null);
+    try {
+      const metadata = await findFiles(query);
+      const mappedAssets = metadata.map(mapMetadataToAsset);
+      setAssets(mappedAssets);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch assets. Please make sure the backend is running.");
+      setAssets([]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleAssetClick = (asset: Asset) => {
@@ -167,8 +223,33 @@ function App() {
     setIsModalOpen(true);
   };
 
-  const handleAssetDownload = (asset: Asset) => {
-    alert("Downloading: " + asset.name);
+  const handleAssetDownload = async (asset: Asset) => {
+    // We need host_ip and shared_folder_name which we stored in the asset object (requires type extension)
+    // Coerce type or update interface. For now, asserting as any to access hidden props.
+    const { host_ip, shared_folder_name, file_path } = asset as any;
+    
+    if (host_ip && shared_folder_name && file_path) {
+      try {
+        await downloadFile(host_ip, shared_folder_name, file_path);
+      } catch (err) {
+        console.error(err);
+        alert("Download failed: " + (err as Error).message);
+      }
+    } else {
+      alert("Missing file metadata for download");
+    }
+  };
+  
+  const handleRefresh = async () => {
+    try {
+      await refreshFiles();
+      alert("Refresh completed successfully");
+      // Optionally re-search if query exists
+      if (searchQuery) handleSearch(searchQuery);
+    } catch (err) {
+      console.error(err);
+      alert("Refresh failed");
+    }
   };
 
   const handleCloseModal = () => {
@@ -176,7 +257,7 @@ function App() {
     setSelectedAsset(null);
   };
 
-  const showResults = searchQuery.trim() || activeFilter !== "all";
+  const showResults = assets.length > 0 || isLoading;
 
   return (
     <>
@@ -237,10 +318,20 @@ function App() {
                 <SearchBar.Clear />
                 <SearchBar.Button>Go</SearchBar.Button>
               </SearchBar.Root>
+              <button 
+                style={refreshButtonStyles} 
+                onClick={handleRefresh}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.3)"}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.2)"}
+              >
+                Refresh
+              </button>
             </div>
+
           </div>
         </div>
         <div style={bottomSectionStyles}>
+          {error && <div style={errorStyles}>{error}</div>}
           {showResults ? (
             <>
               <h2 style={resultsTitleStyles}>

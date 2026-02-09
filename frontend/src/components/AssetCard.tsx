@@ -11,6 +11,9 @@ export interface Asset {
   thumbnail?: string;
   size?: string;
   date?: string;
+  host_ip?: string;
+  shared_folder_name?: string;
+  file_path?: string;
 }
 
 interface AssetCardProps {
