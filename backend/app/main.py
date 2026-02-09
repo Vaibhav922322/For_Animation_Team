@@ -12,14 +12,15 @@ def create_app() -> FastAPI:
     print("Starting synchronous file scan. The server will not accept requests until this finishes...")
     SBMFileExplorer.get_all_files()
     print("File scan completed. Server is now ready.")
-    return app
 
-app = create_app()
-
-app.add_middleware(
+    app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],  # Allows all origins
         allow_credentials=True,
         allow_methods=["*"],  # Allows all methods
         allow_headers=["*"],  # Allows all headers
     )
+    
+    return app
+
+app = create_app()

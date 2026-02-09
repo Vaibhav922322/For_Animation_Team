@@ -10,7 +10,8 @@ export interface FileMetadata {
   host_ip: string; // Assuming string based on download requirement
 }
 
-const API_BASE_URL = 'http://127.0.0.1:8000';
+// Use current origin in production (relative path), or localhost:8000 in dev
+const API_BASE_URL = import.meta.env.DEV ? 'http://127.0.0.1:8000' : '';
 
 export const refreshFiles = async (): Promise<{ message: string }> => {
   console.log('[API] Refreshing files...', `${API_BASE_URL}/refresh/`);
