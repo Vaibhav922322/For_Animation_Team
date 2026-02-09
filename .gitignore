@@ -7,7 +7,7 @@ frontend\.next
 frontend/tsconfig.json
 
 # for backend
-backend/backend_env
+**\server_connection.json
 **\.vscode
 **\.cursor
 *.log

@@ -24,7 +24,7 @@ def parseDownloadPath(downloadPath: str):
 
     return host, share, path
 
-@router.past("/")
+@router.post("/")
 def smb_download(request: DownloadRequest):
     # Host, share and target path for the SMB server.
     # NOTE: `path` can point either to a folder or a single file.
