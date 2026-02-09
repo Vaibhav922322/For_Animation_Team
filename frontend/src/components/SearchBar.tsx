@@ -4,8 +4,8 @@ import React, {
   useState,
   useRef,
   useCallback,
-  ReactNode,
-  CSSProperties,
+  type ReactNode,
+  type CSSProperties,
 } from "react";
 import { Search, X } from "lucide-react";
 
