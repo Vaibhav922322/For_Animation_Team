@@ -2,3 +2,4 @@ pysmb==1.2.13
 psutil==7.2.2
 uvicorn==0.40.0
 fastapi==0.128.2
+python-dotenv==1.2.1

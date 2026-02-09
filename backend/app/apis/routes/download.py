@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Query
-from smb_client.downloader import SBMDownloader
-from smb_client.connection import SMBConnector
+from fastapi import APIRouter
+from ...smb_client.downloader import SBMDownloader
+from ...smb_client.connection import SMBConnector
 from fastapi.background import BackgroundTasks
 from fastapi.responses import FileResponse
 from fastapi import HTTPException
+from ...model.download import DownloadRequest
+from ...utility import Utility
 
 router = APIRouter()
 
@@ -22,19 +24,26 @@ def parseDownloadPath(downloadPath: str):
 
     return host, share, path
 
-@router.get("/")
+@router.post("/")
 def smb_download(
-    host: str,          # e.g. 192.168.1.20
-    share: str,         # e.g. Shared
-    path: str,        # e.g. /Movies or /MyFolder
+    request: DownloadRequest
 ):
     # Host, share and target path for the SMB server.
     # NOTE: `path` can point either to a folder or a single file.
 
     # Connect once and decide whether path is a file or folder
-    conn =  SMBConnector.get_smb_connection(host=host)
+    if(Utility.is_null_or_white_space(request.file_path)):
+        raise HTTPException(status_code=400, detail="Invalid file path")
+
+    if(Utility.is_valid_ipv4(request.host_ip)):
+        raise HTTPException(status_code=400, detail="Invalid host ip")
+
+    if(Utility.is_null_or_white_space(request.shared_folder_name)):
+        raise HTTPException(status_code=400, detail="Invalid shared folder name")
+
+    conn =  SMBConnector.get_smb_connection(host=request.host_ip)
     try:
-        downloadData = SBMDownloader.download(conn=conn, sharedFolder=share, path=path, host=host)
+        downloadData = SBMDownloader.download(conn=conn, sharedFolder=request.shared_folder_name, path=request.file_path, host=request.host_ip)
         
         if (downloadData.file_path is None) or (downloadData.file_name is None) or (downloadData.media_type is None):
             raise HTTPException(status_code=500, detail="Failed to download file")

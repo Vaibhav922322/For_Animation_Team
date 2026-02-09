@@ -35,7 +35,7 @@ class SMBHelper:
                     
                     # Create FileMetadata object
                     is_file = not f.isDirectory
-                    full_unc_path = f"\\\\{GlobalData.ip_to_author.get(conn.remote_name)}\\{share}{full}"
+                    full_unc_path = f"\\\\{conn.remote_name}\\{share}{full}"
                     
                     metadata = FileMetadata(
                         full_unc_path=full_unc_path,
@@ -44,7 +44,8 @@ class SMBHelper:
                         shared_folder_name=share,
                         file_size=f.file_size,
                         is_file=is_file,
-                        host= GlobalData.ip_to_author.get(conn.remote_name)
+                        host= GlobalData.ip_to_author.get(conn.remote_name),
+                        host_ip=conn.remote_name
                     )
 
                     if f.isDirectory:

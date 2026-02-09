@@ -6,7 +6,8 @@ def get_files():
     print(SBMFileExplorer.search_files(query="10_hi"))
 
 def main():
-    get_files()
+    #get_files()
+    pass
     
     
 
