@@ -1,10 +1,70 @@
 @echo off
-echo Starting FastAPI Server from Root...
+setlocal EnableExtensions EnableDelayedExpansion
 
-:: 1. Navigate to the app directory so python finds your imports correctly
-cd app
+REM ===== CONFIG =====
+set "PYTHON_DIR=python"
+set "VENV_DIR=backend_env_window"
+set "REQ_FILE=requirements.txt"
+set "APP_FILE=app\run_server.py"
+REM ==================
 
-:: 2. Run python from the sibling env folder
-"..\backend_env_window\Scripts\python.exe" run_server.py
+echo ===============================
+echo Backend bootstrap starting...
+echo ===============================
 
+REM 1. Check bundled Python
+if not exist "%PYTHON_DIR%\python.exe" (
+    echo [ERROR] Bundled Python not found at %PYTHON_DIR%\python.exe
+    pause
+    exit /b 1
+)
+
+set "BASE_PY=%PYTHON_DIR%\python.exe"
+set "VENV_PY=%VENV_DIR%\Scripts\python.exe"
+
+REM 2. Create venv if missing
+if exist "%VENV_PY%" (
+    echo [INFO] Virtual environment already exists. Skipping creation.
+) else (
+    echo [INFO] Creating virtual environment: %VENV_DIR%
+    "%BASE_PY%" -m venv "%VENV_DIR%"
+    if errorlevel 1 goto :VENV_FAIL
+
+    REM 2.5 Install dependencies
+    if exist "%REQ_FILE%" (
+        echo [INFO] Installing dependencies from %REQ_FILE%
+        "%VENV_PY%" -m pip install --upgrade pip
+        if errorlevel 1 goto :VENV_FAIL
+
+        "%VENV_PY%" -m pip install -r "%REQ_FILE%"
+        if errorlevel 1 goto :VENV_FAIL
+    ) else (
+        echo [WARN] requirements.txt not found. Skipping dependency install.
+    )
+)
+
+REM 3. Run backend
+if not exist "%APP_FILE%" (
+    echo [ERROR] App file not found: %APP_FILE%
+    pause
+    exit /b 1
+)
+
+echo [INFO] Starting backend...
+"%VENV_PY%" "%APP_FILE%"
+
+echo.
+echo Backend exited with code %errorlevel%
 pause
+exit /b %errorlevel%
+
+REM ===== ERROR HANDLER =====
+:VENV_FAIL
+echo.
+echo [ERROR] Venv setup failed. Cleaning up %VENV_DIR% ...
+if exist "%VENV_DIR%" (
+    rmdir /s /q "%VENV_DIR%"
+)
+echo [INFO] Venv folder deleted.
+pause
+exit /b 1

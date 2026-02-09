@@ -12,4 +12,5 @@ frontend/tsconfig.json
 **\.cursor
 *.log
 **\__pycache__
-backend/app/smb_discovered_files.txt
+**/smb_discovered_files.txt
+**\backend_env_*
