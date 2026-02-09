@@ -10,7 +10,6 @@ frontend/tsconfig.json
 backend/backend_env
 **\.vscode
 **\.cursor
-**\.env
 *.log
 **\__pycache__
 backend/app/smb_discovered_files.txt
