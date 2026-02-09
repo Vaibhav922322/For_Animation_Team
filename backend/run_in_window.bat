@@ -5,6 +5,6 @@ echo Starting FastAPI Server from Root...
 cd app
 
 :: 2. Run python from the sibling env folder
-"..\backend_env\Scripts\python.exe" run_server.py
+"..\backend_env_window\Scripts\python.exe" run_server.py
 
 pause
