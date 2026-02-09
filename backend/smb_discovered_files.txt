@@ -1,0 +1,1892 @@
+[
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default",
+        "file_path": "/Default",
+        "file_name": "Default",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/AppData",
+        "file_path": "/Default/AppData",
+        "file_name": "AppData",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Desktop",
+        "file_path": "/Default/Desktop",
+        "file_name": "Desktop",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Documents",
+        "file_path": "/Default/Documents",
+        "file_name": "Documents",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Downloads",
+        "file_path": "/Default/Downloads",
+        "file_name": "Downloads",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Favorites",
+        "file_path": "/Default/Favorites",
+        "file_name": "Favorites",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Links",
+        "file_path": "/Default/Links",
+        "file_name": "Links",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Music",
+        "file_path": "/Default/Music",
+        "file_name": "Music",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/OneDrive",
+        "file_path": "/Default/OneDrive",
+        "file_name": "OneDrive",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Pictures",
+        "file_path": "/Default/Pictures",
+        "file_name": "Pictures",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Saved Games",
+        "file_path": "/Default/Saved Games",
+        "file_name": "Saved Games",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Default/Videos",
+        "file_path": "/Default/Videos",
+        "file_name": "Videos",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/desktop.ini",
+        "file_path": "/desktop.ini",
+        "file_name": "desktop.ini",
+        "shared_folder_name": "Users",
+        "file_size": 174,
+        "is_file": true,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public",
+        "file_path": "/Public",
+        "file_name": "Public",
+        "shared_folder_name": "Users",
+        "file_size": 6322,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/.DS_Store",
+        "file_path": "/Public/.DS_Store",
+        "file_name": ".DS_Store",
+        "shared_folder_name": "Users",
+        "file_size": 6148,
+        "is_file": true,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/AccountPictures",
+        "file_path": "/Public/AccountPictures",
+        "file_name": "AccountPictures",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/desktop.ini",
+        "file_path": "/Public/desktop.ini",
+        "file_name": "desktop.ini",
+        "shared_folder_name": "Users",
+        "file_size": 174,
+        "is_file": true,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/Documents",
+        "file_path": "/Public/Documents",
+        "file_name": "Documents",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/Downloads",
+        "file_path": "/Public/Downloads",
+        "file_name": "Downloads",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/Libraries",
+        "file_path": "/Public/Libraries",
+        "file_name": "Libraries",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/Music",
+        "file_path": "/Public/Music",
+        "file_name": "Music",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/Pictures",
+        "file_path": "/Public/Pictures",
+        "file_name": "Pictures",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.19\\Users/Public/Videos",
+        "file_path": "/Public/Videos",
+        "file_name": "Videos",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "NaitriBackend-2",
+        "host_ip": "192.168.1.19"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/10_HI_SP_01_01",
+        "file_path": "/10_HI_SP_01_01",
+        "file_name": "10_HI_SP_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 5440597768,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/10_HI_SP_01_01/10_HI_SP_01_01.blend",
+        "file_path": "/10_HI_SP_01_01/10_HI_SP_01_01.blend",
+        "file_name": "10_HI_SP_01_01.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 951352573,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/10_HI_SP_01_01/10_HI_SP_01_01.blend1",
+        "file_path": "/10_HI_SP_01_01/10_HI_SP_01_01.blend1",
+        "file_name": "10_HI_SP_01_01.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 951414909,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/10_HI_SP_01_01/assets",
+        "file_path": "/10_HI_SP_01_01/assets",
+        "file_name": "assets",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/10_HI_SP_01_01/characters-2.blend",
+        "file_path": "/10_HI_SP_01_01/characters-2.blend",
+        "file_name": "characters-2.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 761053113,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/10_HI_SP_01_01/characters-2.blend1",
+        "file_path": "/10_HI_SP_01_01/characters-2.blend1",
+        "file_name": "characters-2.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 761053113,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/10_HI_SP_01_01/Characters.blend",
+        "file_path": "/10_HI_SP_01_01/Characters.blend",
+        "file_name": "Characters.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 2015724060,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01",
+        "file_path": "/Assets_09_HI_KS_01_01",
+        "file_name": "Assets_09_HI_KS_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 3849072949,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01/Asset.blend",
+        "file_path": "/Assets_09_HI_KS_01_01/Asset.blend",
+        "file_name": "Asset.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 803134549,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01/Asset.blend1",
+        "file_path": "/Assets_09_HI_KS_01_01/Asset.blend1",
+        "file_name": "Asset.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 812989179,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01/assets",
+        "file_path": "/Assets_09_HI_KS_01_01/assets",
+        "file_name": "assets",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01/Bull 2.blend",
+        "file_path": "/Assets_09_HI_KS_01_01/Bull 2.blend",
+        "file_name": "Bull 2.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 146458344,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01/Bull 2.blend1",
+        "file_path": "/Assets_09_HI_KS_01_01/Bull 2.blend1",
+        "file_name": "Bull 2.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 146454833,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01/Characters.blend",
+        "file_path": "/Assets_09_HI_KS_01_01/Characters.blend",
+        "file_name": "Characters.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 970017742,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_HI_KS_01_01/Characters.blend1",
+        "file_path": "/Assets_09_HI_KS_01_01/Characters.blend1",
+        "file_name": "Characters.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 970018302,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_01_01",
+        "file_path": "/Assets_09_hi_sn_01_01",
+        "file_name": "Assets_09_hi_sn_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 610325135,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_01_01/assets",
+        "file_path": "/Assets_09_hi_sn_01_01/assets",
+        "file_name": "assets",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_01_01/Assets_09_hi_sn_01_01",
+        "file_path": "/Assets_09_hi_sn_01_01/Assets_09_hi_sn_01_01",
+        "file_name": "Assets_09_hi_sn_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_01_01/Untitled.blend1",
+        "file_path": "/Assets_09_hi_sn_01_01/Untitled.blend1",
+        "file_name": "Untitled.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 610325135,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_01_01.zip",
+        "file_path": "/Assets_09_hi_sn_01_01.zip",
+        "file_name": "Assets_09_hi_sn_01_01.zip",
+        "shared_folder_name": "Hindi",
+        "file_size": 1456502145,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01",
+        "file_path": "/Assets_09_hi_sn_02_01",
+        "file_name": "Assets_09_hi_sn_02_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/Blender Animation files",
+        "file_path": "/Assets_09_hi_sn_02_01/Blender Animation files",
+        "file_name": "Blender Animation files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/Blender Assets files",
+        "file_path": "/Assets_09_hi_sn_02_01/Blender Assets files",
+        "file_name": "Blender Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/Exported files",
+        "file_path": "/Assets_09_hi_sn_02_01/Exported files",
+        "file_name": "Exported files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/Maya Assets files",
+        "file_path": "/Assets_09_hi_sn_02_01/Maya Assets files",
+        "file_name": "Maya Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/Source files",
+        "file_path": "/Assets_09_hi_sn_02_01/Source files",
+        "file_name": "Source files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/Susbtance painter files",
+        "file_path": "/Assets_09_hi_sn_02_01/Susbtance painter files",
+        "file_name": "Susbtance painter files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/Textures",
+        "file_path": "/Assets_09_hi_sn_02_01/Textures",
+        "file_name": "Textures",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sn_02_01/WORK",
+        "file_path": "/Assets_09_hi_sn_02_01/WORK",
+        "file_name": "WORK",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_01_01",
+        "file_path": "/Assets_09_hi_sp_01_01",
+        "file_name": "Assets_09_hi_sp_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 5559525,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_01_01/09_hi_sp_01_02-Edited.mp3",
+        "file_path": "/Assets_09_hi_sp_01_01/09_hi_sp_01_02-Edited.mp3",
+        "file_name": "09_hi_sp_01_02-Edited.mp3",
+        "shared_folder_name": "Hindi",
+        "file_size": 4603553,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_01_01/Animation",
+        "file_path": "/Assets_09_hi_sp_01_01/Animation",
+        "file_name": "Animation",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_01_01/Blender",
+        "file_path": "/Assets_09_hi_sp_01_01/Blender",
+        "file_name": "Blender",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_01_01/branches_with_leaves_wreath.glb",
+        "file_path": "/Assets_09_hi_sp_01_01/branches_with_leaves_wreath.glb",
+        "file_name": "branches_with_leaves_wreath.glb",
+        "shared_folder_name": "Hindi",
+        "file_size": 955972,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_01_01/images",
+        "file_path": "/Assets_09_hi_sp_01_01/images",
+        "file_name": "images",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_02_01",
+        "file_path": "/Assets_09_hi_sp_02_01",
+        "file_name": "Assets_09_hi_sp_02_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_02_01/assets",
+        "file_path": "/Assets_09_hi_sp_02_01/assets",
+        "file_name": "assets",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_09_hi_sp_02_01/Assets_09_hi_sp_02_01",
+        "file_path": "/Assets_09_hi_sp_02_01/Assets_09_hi_sp_02_01",
+        "file_name": "Assets_09_hi_sp_02_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01",
+        "file_path": "/Assets_10_HI_KR_01_01",
+        "file_name": "Assets_10_HI_KR_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 2901339150,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Assets_10_HI_KR_01_01-Part_1.blend",
+        "file_path": "/Assets_10_HI_KR_01_01/Assets_10_HI_KR_01_01-Part_1.blend",
+        "file_name": "Assets_10_HI_KR_01_01-Part_1.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 1945621825,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Assets_10_HI_KR_01_01-Part_1.blend1",
+        "file_path": "/Assets_10_HI_KR_01_01/Assets_10_HI_KR_01_01-Part_1.blend1",
+        "file_name": "Assets_10_HI_KR_01_01-Part_1.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 955717325,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Blender Animation files",
+        "file_path": "/Assets_10_HI_KR_01_01/Blender Animation files",
+        "file_name": "Blender Animation files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Blender Assets files",
+        "file_path": "/Assets_10_HI_KR_01_01/Blender Assets files",
+        "file_name": "Blender Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Exported files",
+        "file_path": "/Assets_10_HI_KR_01_01/Exported files",
+        "file_name": "Exported files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Maya Assets files",
+        "file_path": "/Assets_10_HI_KR_01_01/Maya Assets files",
+        "file_name": "Maya Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Source files",
+        "file_path": "/Assets_10_HI_KR_01_01/Source files",
+        "file_name": "Source files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Susbtance painter files",
+        "file_path": "/Assets_10_HI_KR_01_01/Susbtance painter files",
+        "file_name": "Susbtance painter files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KR_01_01/Textures",
+        "file_path": "/Assets_10_HI_KR_01_01/Textures",
+        "file_name": "Textures",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01",
+        "file_path": "/Assets_10_HI_KS_01_01",
+        "file_name": "Assets_10_HI_KS_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01/Blender Animation files",
+        "file_path": "/Assets_10_HI_KS_01_01/Blender Animation files",
+        "file_name": "Blender Animation files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01/Blender Assets files",
+        "file_path": "/Assets_10_HI_KS_01_01/Blender Assets files",
+        "file_name": "Blender Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01/Exported files",
+        "file_path": "/Assets_10_HI_KS_01_01/Exported files",
+        "file_name": "Exported files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01/Maya Assets files",
+        "file_path": "/Assets_10_HI_KS_01_01/Maya Assets files",
+        "file_name": "Maya Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01/Source files",
+        "file_path": "/Assets_10_HI_KS_01_01/Source files",
+        "file_name": "Source files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01/Susbtance painter files",
+        "file_path": "/Assets_10_HI_KS_01_01/Susbtance painter files",
+        "file_name": "Susbtance painter files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_01_01/Textures",
+        "file_path": "/Assets_10_HI_KS_01_01/Textures",
+        "file_name": "Textures",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_02_01",
+        "file_path": "/Assets_10_HI_KS_02_01",
+        "file_name": "Assets_10_HI_KS_02_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 2644622416,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_02_01/assets",
+        "file_path": "/Assets_10_HI_KS_02_01/assets",
+        "file_name": "assets",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_02_01/Characters.blend",
+        "file_path": "/Assets_10_HI_KS_02_01/Characters.blend",
+        "file_name": "Characters.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 1318385606,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_02_01/Characters.blend1",
+        "file_path": "/Assets_10_HI_KS_02_01/Characters.blend1",
+        "file_name": "Characters.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 1032377553,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_02_01/New Text Document.txt",
+        "file_path": "/Assets_10_HI_KS_02_01/New Text Document.txt",
+        "file_name": "New Text Document.txt",
+        "shared_folder_name": "Hindi",
+        "file_size": 399,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_02_01/rajya sabha.blend",
+        "file_path": "/Assets_10_HI_KS_02_01/rajya sabha.blend",
+        "file_name": "rajya sabha.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 146943031,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_02_01/rajya sabha.blend1",
+        "file_path": "/Assets_10_HI_KS_02_01/rajya sabha.blend1",
+        "file_name": "rajya sabha.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 146915827,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_03_01",
+        "file_path": "/Assets_10_HI_KS_03_01",
+        "file_name": "Assets_10_HI_KS_03_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 3097807774,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_03_01/assets",
+        "file_path": "/Assets_10_HI_KS_03_01/assets",
+        "file_name": "assets",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_03_01/Assets_10_HI_KS_03_01 (2).blend",
+        "file_path": "/Assets_10_HI_KS_03_01/Assets_10_HI_KS_03_01 (2).blend",
+        "file_name": "Assets_10_HI_KS_03_01 (2).blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 1128341384,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_KS_03_01/Assets_10_HI_KS_03_01 (2).blend1",
+        "file_path": "/Assets_10_HI_KS_03_01/Assets_10_HI_KS_03_01 (2).blend1",
+        "file_name": "Assets_10_HI_KS_03_01 (2).blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 1969466390,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_08_02",
+        "file_path": "/Assets_10_HI_SP_08_02",
+        "file_name": "Assets_10_HI_SP_08_02",
+        "shared_folder_name": "Hindi",
+        "file_size": 3481442193,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_08_02/aSSET.blend",
+        "file_path": "/Assets_10_HI_SP_08_02/aSSET.blend",
+        "file_name": "aSSET.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 725238618,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_08_02/aSSET.blend1",
+        "file_path": "/Assets_10_HI_SP_08_02/aSSET.blend1",
+        "file_name": "aSSET.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 725121321,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_08_02/assets",
+        "file_path": "/Assets_10_HI_SP_08_02/assets",
+        "file_name": "assets",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_08_02/Kids.blend",
+        "file_path": "/Assets_10_HI_SP_08_02/Kids.blend",
+        "file_name": "Kids.blend",
+        "shared_folder_name": "Hindi",
+        "file_size": 1055872973,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_08_02/Kids.blend1",
+        "file_path": "/Assets_10_HI_SP_08_02/Kids.blend1",
+        "file_name": "Kids.blend1",
+        "shared_folder_name": "Hindi",
+        "file_size": 975209281,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_08_02.zip",
+        "file_path": "/Assets_10_HI_SP_08_02.zip",
+        "file_name": "Assets_10_HI_SP_08_02.zip",
+        "shared_folder_name": "Hindi",
+        "file_size": 2699951876,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01",
+        "file_path": "/Assets_10_HI_SP_09_01",
+        "file_name": "Assets_10_HI_SP_09_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/asset texture made",
+        "file_path": "/Assets_10_HI_SP_09_01/asset texture made",
+        "file_name": "asset texture made",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/Blender Animation files",
+        "file_path": "/Assets_10_HI_SP_09_01/Blender Animation files",
+        "file_name": "Blender Animation files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/Blender Assets files",
+        "file_path": "/Assets_10_HI_SP_09_01/Blender Assets files",
+        "file_name": "Blender Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/Exported files",
+        "file_path": "/Assets_10_HI_SP_09_01/Exported files",
+        "file_name": "Exported files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/Maya Assets files",
+        "file_path": "/Assets_10_HI_SP_09_01/Maya Assets files",
+        "file_name": "Maya Assets files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/Source files",
+        "file_path": "/Assets_10_HI_SP_09_01/Source files",
+        "file_name": "Source files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/Susbtance painter files",
+        "file_path": "/Assets_10_HI_SP_09_01/Susbtance painter files",
+        "file_name": "Susbtance painter files",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Assets_10_HI_SP_09_01/Textures",
+        "file_path": "/Assets_10_HI_SP_09_01/Textures",
+        "file_name": "Textures",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Asset_09_HI_KR_01_01",
+        "file_path": "/Asset_09_HI_KR_01_01",
+        "file_name": "Asset_09_HI_KR_01_01",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Hindi/Asset_09_HI_KR_01_01/bLEND",
+        "file_path": "/Asset_09_HI_KR_01_01/bLEND",
+        "file_name": "bLEND",
+        "shared_folder_name": "Hindi",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/10th.zip",
+        "file_path": "/10th.zip",
+        "file_name": "10th.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 25800187,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/9th.zip",
+        "file_path": "/9th.zip",
+        "file_name": "9th.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 10373337,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Book page.zip",
+        "file_path": "/Book page.zip",
+        "file_name": "Book page.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 2112371,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Civics",
+        "file_path": "/Civics",
+        "file_name": "Civics",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Civics/Class 10th",
+        "file_path": "/Civics/Class 10th",
+        "file_name": "Class 10th",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Civics/Class 9th",
+        "file_path": "/Civics/Class 9th",
+        "file_name": "Class 9th",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/class 9th science chapter 7 topic division.pdf",
+        "file_path": "/class 9th science chapter 7 topic division.pdf",
+        "file_name": "class 9th science chapter 7 topic division.pdf",
+        "shared_folder_name": "Image target",
+        "file_size": 2611056,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/compressed history class 9th",
+        "file_path": "/compressed history class 9th",
+        "file_name": "compressed history class 9th",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/compressed history class 9th/11zon_compressed",
+        "file_path": "/compressed history class 9th/11zon_compressed",
+        "file_name": "11zon_compressed",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/compressed history class 9th.zip",
+        "file_path": "/compressed history class 9th.zip",
+        "file_name": "compressed history class 9th.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 5091366,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Geography",
+        "file_path": "/Geography",
+        "file_name": "Geography",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Geography/Class 10th Geography",
+        "file_path": "/Geography/Class 10th Geography",
+        "file_name": "Class 10th Geography",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Geography/Class 9th Geography",
+        "file_path": "/Geography/Class 9th Geography",
+        "file_name": "Class 9th Geography",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Geography.zip",
+        "file_path": "/Geography.zip",
+        "file_name": "Geography.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 32270073,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Hindi",
+        "file_path": "/Hindi",
+        "file_name": "Hindi",
+        "shared_folder_name": "Image target",
+        "file_size": 19855647,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Hindi/Class 10th",
+        "file_path": "/Hindi/Class 10th",
+        "file_name": "Class 10th",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Hindi/Class 10th.zip",
+        "file_path": "/Hindi/Class 10th.zip",
+        "file_name": "Class 10th.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 10302386,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Hindi/Class 9th",
+        "file_path": "/Hindi/Class 9th",
+        "file_name": "Class 9th",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Hindi/Class 9th.zip",
+        "file_path": "/Hindi/Class 9th.zip",
+        "file_name": "Class 9th.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 9553261,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Maths",
+        "file_path": "/Maths",
+        "file_name": "Maths",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Maths/English",
+        "file_path": "/Maths/English",
+        "file_name": "English",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Maths/Hindi",
+        "file_path": "/Maths/Hindi",
+        "file_name": "Hindi",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Maths.zip",
+        "file_path": "/Maths.zip",
+        "file_name": "Maths.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 42853630,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/photos.zip",
+        "file_path": "/photos.zip",
+        "file_name": "photos.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 16753350,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/sanskrit",
+        "file_path": "/sanskrit",
+        "file_name": "sanskrit",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/sanskrit/class 10th sanskrit",
+        "file_path": "/sanskrit/class 10th sanskrit",
+        "file_name": "class 10th sanskrit",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/sanskrit/class 9th sanskrit",
+        "file_path": "/sanskrit/class 9th sanskrit",
+        "file_name": "class 9th sanskrit",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/sanskrit.zip",
+        "file_path": "/sanskrit.zip",
+        "file_name": "sanskrit.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 5815136,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science",
+        "file_path": "/Science",
+        "file_name": "Science",
+        "shared_folder_name": "Image target",
+        "file_size": 38944415,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science/class 10th science images",
+        "file_path": "/Science/class 10th science images",
+        "file_name": "class 10th science images",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science/class 9th science images",
+        "file_path": "/Science/class 9th science images",
+        "file_name": "class 9th science images",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science/Science.zip",
+        "file_path": "/Science/Science.zip",
+        "file_name": "Science.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 38944415,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science book",
+        "file_path": "/Science book",
+        "file_name": "Science book",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science book/class 10th science",
+        "file_path": "/Science book/class 10th science",
+        "file_name": "class 10th science",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science book/class 9th science",
+        "file_path": "/Science book/class 9th science",
+        "file_name": "class 9th science",
+        "shared_folder_name": "Image target",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science book.zip",
+        "file_path": "/Science book.zip",
+        "file_name": "Science book.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 92228030,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Image target/Science.zip",
+        "file_path": "/Science.zip",
+        "file_name": "Science.zip",
+        "shared_folder_name": "Image target",
+        "file_size": 38543921,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Civics",
+        "file_path": "/Civics",
+        "file_name": "Civics",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Civics/10th",
+        "file_path": "/Civics/10th",
+        "file_name": "10th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Civics/9th",
+        "file_path": "/Civics/9th",
+        "file_name": "9th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/desktop.ini",
+        "file_path": "/desktop.ini",
+        "file_name": "desktop.ini",
+        "shared_folder_name": "Updated files",
+        "file_size": 46,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Economics",
+        "file_path": "/Economics",
+        "file_name": "Economics",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Economics/10th",
+        "file_path": "/Economics/10th",
+        "file_name": "10th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Economics/9th",
+        "file_path": "/Economics/9th",
+        "file_name": "9th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Geography",
+        "file_path": "/Geography",
+        "file_name": "Geography",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Geography/10th",
+        "file_path": "/Geography/10th",
+        "file_name": "10th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Geography/6th",
+        "file_path": "/Geography/6th",
+        "file_name": "6th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Geography/7th",
+        "file_path": "/Geography/7th",
+        "file_name": "7th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Geography/8th",
+        "file_path": "/Geography/8th",
+        "file_name": "8th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Geography/9th",
+        "file_path": "/Geography/9th",
+        "file_name": "9th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Hindi Jeevan parichay",
+        "file_path": "/Hindi Jeevan parichay",
+        "file_name": "Hindi Jeevan parichay",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Hindi Jeevan parichay/10th",
+        "file_path": "/Hindi Jeevan parichay/10th",
+        "file_name": "10th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Hindi Jeevan parichay/9th",
+        "file_path": "/Hindi Jeevan parichay/9th",
+        "file_name": "9th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/History",
+        "file_path": "/History",
+        "file_name": "History",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/History/10th",
+        "file_path": "/History/10th",
+        "file_name": "10th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/History/9th",
+        "file_path": "/History/9th",
+        "file_name": "9th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Maths",
+        "file_path": "/Maths",
+        "file_name": "Maths",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Maths/10th",
+        "file_path": "/Maths/10th",
+        "file_name": "10th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Maths/9th",
+        "file_path": "/Maths/9th",
+        "file_name": "9th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Science",
+        "file_path": "/Science",
+        "file_name": "Science",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Science/10th",
+        "file_path": "/Science/10th",
+        "file_name": "10th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Science/6th",
+        "file_path": "/Science/6th",
+        "file_name": "6th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Science/7th",
+        "file_path": "/Science/7th",
+        "file_name": "7th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Science/8th",
+        "file_path": "/Science/8th",
+        "file_name": "8th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Science/9th",
+        "file_path": "/Science/9th",
+        "file_name": "9th",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Test",
+        "file_path": "/Test",
+        "file_name": "Test",
+        "shared_folder_name": "Updated files",
+        "file_size": 124882868,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Test/10_sc_sc_06_04.glb",
+        "file_path": "/Test/10_sc_sc_06_04.glb",
+        "file_name": "10_sc_sc_06_04.glb",
+        "shared_folder_name": "Updated files",
+        "file_size": 124882868,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Updated files/Test/2k testing",
+        "file_path": "/Test/2k testing",
+        "file_name": "2k testing",
+        "shared_folder_name": "Updated files",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default",
+        "file_path": "/Default",
+        "file_name": "Default",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/AppData",
+        "file_path": "/Default/AppData",
+        "file_name": "AppData",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Desktop",
+        "file_path": "/Default/Desktop",
+        "file_name": "Desktop",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Documents",
+        "file_path": "/Default/Documents",
+        "file_name": "Documents",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Downloads",
+        "file_path": "/Default/Downloads",
+        "file_name": "Downloads",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Favorites",
+        "file_path": "/Default/Favorites",
+        "file_name": "Favorites",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Links",
+        "file_path": "/Default/Links",
+        "file_name": "Links",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Music",
+        "file_path": "/Default/Music",
+        "file_name": "Music",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/OneDrive",
+        "file_path": "/Default/OneDrive",
+        "file_name": "OneDrive",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Pictures",
+        "file_path": "/Default/Pictures",
+        "file_name": "Pictures",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Saved Games",
+        "file_path": "/Default/Saved Games",
+        "file_name": "Saved Games",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/Default/Videos",
+        "file_path": "/Default/Videos",
+        "file_name": "Videos",
+        "shared_folder_name": "Users",
+        "file_size": 0,
+        "is_file": false,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    },
+    {
+        "full_unc_path": "\\\\192.168.1.14\\Users/desktop.ini",
+        "file_path": "/desktop.ini",
+        "file_name": "desktop.ini",
+        "shared_folder_name": "Users",
+        "file_size": 174,
+        "is_file": true,
+        "host": "ABHAY",
+        "host_ip": "192.168.1.14"
+    }
+]
