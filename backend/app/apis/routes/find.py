@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from typing import List, Dict, Any
-from ...smb_client.explorer import SBMFileExplorer
+from smb_client.explorer import SBMFileExplorer
 
 router = APIRouter()
 

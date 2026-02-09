@@ -3,6 +3,7 @@ import ipaddress
 import psutil
 from typing import List, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from model.globalData import GlobalData
 
 class NetworkDiscovery:
     def get_local_ip():
@@ -36,16 +37,17 @@ class NetworkDiscovery:
         except OSError:
             return False
 
-    def discover_hosts_in_cidr(cidr: str, port: int = 445) -> List[str]:
+    def discover_hosts_in_cidr(cidr: str, port: int = 445) -> List[dict]:
         """
         Discover SMB hosts in parallel instead of scanning sequentially.
         This greatly reduces total scan time on larger subnets.
+        Returns a list of dicts: {"ip": str, "hostname": str}
         """
         net = ipaddress.ip_network(cidr, strict=False)
 
         # Prepare list of all host IPs in the CIDR
         ip_list = [str(ip) for ip in net.hosts()]
-        hosts: List[str] = []
+        hosts: List[dict] = []
 
         if not ip_list:
             return hosts
@@ -53,17 +55,24 @@ class NetworkDiscovery:
         # Limit concurrency to avoid overwhelming the network / OS
         max_workers = min(len(ip_list), 64)
 
-        def _check(ip_str: str) -> Tuple[str, bool]:
-            return ip_str, NetworkDiscovery.is_port_open(ip_str, port=port)
+        def _check(ip_str: str) -> Tuple[str, bool, str]:
+            is_open = NetworkDiscovery.is_port_open(ip_str, port=port)
+            hostname = ""
+            if is_open:
+                try:
+                    hostname = socket.gethostbyaddr(ip_str)[0]
+                except Exception:
+                    hostname = ip_str
+            return ip_str, is_open, hostname
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = [executor.submit(_check, ip_str) for ip_str in ip_list]
             for fut in as_completed(futures):
                 try:
-                    ip_str, open_ok = fut.result()
-                    print(fut.result())
+                    ip_str, open_ok, hostname = fut.result()
                     if open_ok:
-                        hosts.append(ip_str)
+                        hosts.append({"ip": ip_str, "hostname": hostname})
+                        GlobalData.ip_to_author[ip_str] = hostname
                 except Exception:
                     # Ignore individual probe errors; treat them as "closed"
                     continue
