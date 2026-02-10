@@ -7,8 +7,8 @@
 set -u   # error on undefined vars
 
 # ===== CONFIG =====
-PYTHON_DIR="python"
-VENV_DIR="backend_env_window"
+PYTHON_DIR="runtime/python_for_unix"
+VENV_DIR="runtime/backend_env_unix"
 REQ_FILE="requirements.txt"
 APP_FILE="app/run_server.py"
 # ==================

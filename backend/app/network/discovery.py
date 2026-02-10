@@ -18,7 +18,7 @@ class NetworkDiscovery:
 
     def get_lan_cidr():
         hostname = socket.gethostname()
-        local_ip = socket.gethostbyname(hostname)
+        local_ip = NetworkDiscovery.get_local_ip()
         for iface, addrs in psutil.net_if_addrs().items():
             for addr in addrs:
                 if addr.family.name == "AF_INET" and addr.address == local_ip:
@@ -62,7 +62,7 @@ class NetworkDiscovery:
                 try:
                     hostname = socket.gethostbyaddr(ip_str)[0]
                 except Exception:
-                    hostname = ip_str
+                    hostname = "Host name not available"
             return ip_str, is_open, hostname
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:

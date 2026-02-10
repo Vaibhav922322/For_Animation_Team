@@ -2,8 +2,8 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 REM ===== CONFIG =====
-set "PYTHON_DIR=python"
-set "VENV_DIR=backend_env_window"
+set "PYTHON_DIR=runtime\python_for_windows"
+set "VENV_DIR=runtime\backend_env_window"
 set "REQ_FILE=requirements.txt"
 set "APP_FILE=app\run_server.py"
 REM ==================

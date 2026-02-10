@@ -1,0 +1,13 @@
+# See: man pkg-config
+prefix=/home/vaibhav/Desktop/For_Animation_team/For_Animation_Team/backend/python_for_unix
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Python
+Description: Build a C extension for Python
+Requires:
+Version: 3.14
+Libs.private: -ldl 
+Libs: -L${libdir} 
+Cflags: -I${includedir}/python3.14

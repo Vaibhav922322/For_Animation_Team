@@ -1,6 +1,13 @@
 import uvicorn
 import socket
 import json
+from pathlib import Path
+
+def get_server_connection_file_path():
+
+    parent_dir = Path.cwd().parent
+    file_path = parent_dir / "server_connection.json"
+    return file_path    
 
 def save_server_connection(server_ip : str, port: int):
     data = {
@@ -9,7 +16,7 @@ def save_server_connection(server_ip : str, port: int):
     }
 
     # Define your file path
-    server_connection_file_path = "..\\server_connection.json"
+    server_connection_file_path = get_server_connection_file_path()
 
     with open(server_connection_file_path, "w") as json_file:
         json.dump(data, json_file, indent=4)

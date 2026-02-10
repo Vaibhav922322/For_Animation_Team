@@ -1,0 +1,7 @@
+#!/home/vaibhav/Desktop/For_Animation_team/For_Animation_Team/backend/python_for_unix/bin/python3.14
+import sys
+from pip._internal.cli.main import main
+if __name__ == '__main__':
+    if sys.argv[0].endswith('.exe'):
+        sys.argv[0] = sys.argv[0][:-4]
+    sys.exit(main())

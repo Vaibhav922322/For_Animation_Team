@@ -1,0 +1,5 @@
+#!/home/vaibhav/Desktop/For_Animation_team/For_Animation_Team/backend/python_for_unix/bin/python3.14
+
+import pydoc
+if __name__ == '__main__':
+    pydoc.cli()
