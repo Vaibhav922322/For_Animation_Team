@@ -1,5 +1,4 @@
 import { type CSSProperties } from "react";
-import { motion } from "motion/react";
 import AssetCard, { type Asset } from "./AssetCard";
 
 interface AssetGridProps {
@@ -37,32 +36,6 @@ const emptyIconStyles: CSSProperties = {
 const emptyTextStyles: CSSProperties = {
   fontSize: "1rem",
   margin: 0,
-};
-
-// =============================================================================
-// Animation Variants
-// =============================================================================
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.03,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.3,
-      ease: "easeInOut" as const,
-    },
-  },
 };
 
 // =============================================================================

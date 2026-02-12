@@ -175,7 +175,6 @@ function App() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [downloadFileName, setDownloadFileName] = useState("");
   
   const [assets, setAssets] = useState<Asset[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -231,7 +230,6 @@ function App() {
     
     if (host_ip && shared_folder_name && file_path) {
       try {
-        setDownloadFileName(asset.name);
         await downloadFile(
           host_ip,
           shared_folder_name,
@@ -271,7 +269,7 @@ function App() {
   return (
     <>
       {/* Download Overlay */}
-      <DownloadOverlay isVisible={isDownloading} fileName={downloadFileName} />
+      <DownloadOverlay isVisible={isDownloading} />
       {/* Antigravity Background */}
       <div style={backgroundStyles}>
         <Antigravity

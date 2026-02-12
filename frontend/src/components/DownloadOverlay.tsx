@@ -4,7 +4,6 @@ import catLoader from "../assets/Loader cat.json";
 
 interface DownloadOverlayProps {
   isVisible: boolean;
-  fileName?: string;
 }
 
 // =============================================================================
@@ -39,30 +38,10 @@ const lottieStyles: CSSProperties = {
   height: "400px",
 };
 
-const textStyles: CSSProperties = {
-  color: "#e2e8f0",
-  fontSize: "1.1rem",
-  fontWeight: 500,
-  margin: 0,
-  textAlign: "center",
-};
-
-const fileNameStyles: CSSProperties = {
-  color: "#94a3b8",
-  fontSize: "0.85rem",
-  fontWeight: 400,
-  margin: 0,
-  textAlign: "center",
-  maxWidth: "300px",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-};
-
 // =============================================================================
 // Component
 // =============================================================================
-const DownloadOverlay = ({ isVisible, fileName }: DownloadOverlayProps) => {
+const DownloadOverlay = ({ isVisible }: DownloadOverlayProps) => {
   if (!isVisible) return null;
 
   return (
