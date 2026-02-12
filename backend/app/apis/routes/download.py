@@ -1,10 +1,12 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from smb_client.downloader import SBMDownloader
 from smb_client.connection import SMBConnector
 from fastapi.background import BackgroundTasks
 from fastapi.responses import FileResponse, StreamingResponse
+from model.download import DownloadRequest
+from utility import Utility
 
-# ... (imports)
+router = APIRouter()
 
 @router.post("/")
 def smb_download(request: DownloadRequest):
