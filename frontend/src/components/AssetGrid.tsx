@@ -47,7 +47,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.03,
     },
   },
 };
@@ -80,22 +80,17 @@ const AssetGrid = ({ assets, onAssetClick, onAssetDownload }: AssetGridProps) =>
 
   return (
     <div style={gridContainerStyles}>
-      <motion.div
-        style={gridStyles}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {assets.map((asset) => (
-          <motion.div key={asset.id} variants={itemVariants}>
+      <div style={gridStyles}>
+        {assets.map((asset, index) => (
+          <div key={`${asset.id}-${index}`}>
             <AssetCard
               asset={asset}
               onClick={() => onAssetClick(asset)}
               onDownload={() => onAssetDownload(asset)}
             />
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import type { Asset } from "./components/AssetCard";
 import SplitText from "./components/SplitText";
 import ShinyText from "./components/ShinyText";
 import Antigravity from "./components/Antigravity";
+import DownloadOverlay from "./components/DownloadOverlay";
 import { findFiles, refreshFiles, downloadFile, type FileMetadata } from "./services/api";
 
 // Helper to map API metadata to Asset interface
@@ -22,7 +23,7 @@ const mapMetadataToAsset = (file: FileMetadata): Asset => {
   const sizeMB = (file.file_size / (1024 * 1024)).toFixed(1);
   
   return {
-    id: file.file_path, // Use path as unique ID
+    id: file.full_unc_path, // Use full UNC path as unique ID (unique across hosts)
     name: file.file_name,
     type,
     size: `${sizeMB} MB`,
@@ -173,6 +174,8 @@ function App() {
   const [activeSort, setActiveSort] = useState<SortType>("name-asc");
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadFileName, setDownloadFileName] = useState("");
   
   const [assets, setAssets] = useState<Asset[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -224,19 +227,25 @@ function App() {
   };
 
   const handleAssetDownload = async (asset: Asset) => {
-    // We need host_ip and shared_folder_name which we stored in the asset object (requires type extension)
-    // Coerce type or update interface. For now, asserting as any to access hidden props.
     const { host_ip, shared_folder_name, file_path } = asset as any;
     
     if (host_ip && shared_folder_name && file_path) {
       try {
-        await downloadFile(host_ip, shared_folder_name, file_path);
+        setDownloadFileName(asset.name);
+        await downloadFile(
+          host_ip,
+          shared_folder_name,
+          file_path,
+          () => setIsDownloading(true),
+          () => setIsDownloading(false)
+        );
       } catch (err) {
         console.error(err);
-        alert("Download failed: " + (err as Error).message);
+        setIsDownloading(false);
+        setError("Download failed: " + (err as Error).message);
       }
     } else {
-      alert("Missing file metadata for download");
+      setError("Missing file metadata for download");
     }
   };
   
@@ -261,6 +270,8 @@ function App() {
 
   return (
     <>
+      {/* Download Overlay */}
+      <DownloadOverlay isVisible={isDownloading} fileName={downloadFileName} />
       {/* Antigravity Background */}
       <div style={backgroundStyles}>
         <Antigravity
