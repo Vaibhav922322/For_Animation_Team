@@ -99,7 +99,7 @@ class SMBHelper:
 
         # Root of the share is always a directory
         if normalized == "/":
-            return normalized, "", True
+            return normalized, "", True, 0
 
         # Split into parent folder and entry name
         if "/" in normalized:
@@ -118,7 +118,7 @@ class SMBHelper:
 
         for entry in entries:
             if entry.filename == name:
-                return normalized, name, entry.isDirectory
+                return normalized, name, entry.isDirectory, entry.file_size
 
         raise HTTPException(
             status_code=404,

@@ -71,35 +71,52 @@ class SBMDownloader:
 
     def download(conn: SMBConnection, sharedFolder: str, path: str, host: str, username: str = "", password: str = "") -> FileDownloadData | None:
         try:
-            normalized_path, name, is_dir = SMBHelper.smb_path_info(conn, sharedFolder, path)
+            normalized_path, name, is_dir, file_size = SMBHelper.smb_path_info(conn, sharedFolder, path)
             final_file_path = None
             final_file_name = None
             final_media_type = None
+            
             # If it's a directory, zip it and return the zip
             if is_dir:
-                zip_name = (name or "folder") + ".zip"
-                zip_path = SBMDownloader.smb_zip_to_tempfile(host, sharedFolder, normalized_path, username, password)
-                final_file_path = zip_path
-                final_file_name = zip_name
-                final_media_type = "application/zip"
+                try:
+                    zip_name = (name or "folder") + ".zip"
+                    # Note: smb_zip_to_tempfile creates its OWN connection, so we don't need 'conn' for the zip content download.
+                    # explicit close of 'conn' since we are done with it for directory listing
+                    conn.close() 
+                    
+                    zip_path = SBMDownloader.smb_zip_to_tempfile(host, sharedFolder, normalized_path, username, password)
+                    final_file_path = zip_path
+                    final_file_name = zip_name
+                    final_media_type = "application/zip"
+                    
+                    if (final_file_path is None) or (final_file_name is None) or (final_media_type is None):
+                        return None
+                    
+                    return FileDownloadData(file_name=final_file_name, 
+                                            file_path=final_file_path, 
+                                            media_type=final_media_type)
+                except Exception:
+                    conn.close() # Ensure close on error if not already
+                    raise
 
             else:
-                # Otherwise, it's a file: download it directly
-                file_path = SBMDownloader.smb_download_file_to_tempfile(conn, sharedFolder, normalized_path, filename_hint=name)
-                final_file_path = file_path
-                final_file_name = name or "download"
-                final_media_type = "application/octet-stream"
+                # Otherwise, it's a file: use streaming
+                # Do NOT close conn here; streamer will close it.
+                from .streamer import SMBStreamer
+                streamer = SMBStreamer(conn, sharedFolder, normalized_path)
+                streamer.start()
+                
+                return FileDownloadData(
+                    file_name=name or "download", 
+                    file_path="",  # No local path for streams
+                    media_type="application/octet-stream",
+                    file_size=file_size,
+                    stream=streamer.generator()
+                )
 
-            if (final_file_path is None) or (final_file_name is None) or (final_media_type is None):
-                return None
-
-            return FileDownloadData(file_name=final_file_name, 
-                                    file_path=final_file_path, 
-                                    media_type=final_media_type)
-             
-
-        finally:
+        except Exception:
             try:
                 conn.close()
             except Exception:
                 pass
+            raise
