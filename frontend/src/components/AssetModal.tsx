@@ -1,7 +1,9 @@
-import { useEffect, type CSSProperties } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Download, FileBox, Image, Film, File, Calendar, HardDrive } from "lucide-react";
 import type { Asset } from "./AssetCard";
+
+import { previewFile } from "../services/api";
 
 interface AssetModalProps {
   asset: Asset | null;
@@ -196,6 +198,9 @@ const primaryButtonStyles: CSSProperties = {
 // Component
 // =============================================================================
 const AssetModal = ({ asset, isOpen, onClose, onDownload }: AssetModalProps) => {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+
   // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -214,6 +219,40 @@ const AssetModal = ({ asset, isOpen, onClose, onDownload }: AssetModalProps) => 
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
+
+  // Fetch preview when asset changes
+  useEffect(() => {
+    if (isOpen && asset && (asset.type === "texture" || asset.type === "model" || asset.name.match(/\.(jpg|jpeg|png|gif|webp)$/i))) {
+      // Only fetch for images/textures or items that look like images
+      // Note: 'model' might include thumbnails later, but for now we try if it's an image file
+      const isImage = asset.type === "texture" || asset.name.match(/\.(jpg|jpeg|png|gif|webp)$/i);
+      
+      if (isImage) {
+        setIsLoadingPreview(true);
+        const { host_ip, shared_folder_name, file_path } = asset as any;
+        
+        previewFile(host_ip, shared_folder_name, file_path)
+          .then((blob) => {
+            const url = URL.createObjectURL(blob);
+            setPreviewUrl(url);
+            setIsLoadingPreview(false);
+          })
+          .catch((err) => {
+            console.error("Failed to load preview", err);
+            setIsLoadingPreview(false);
+          });
+      }
+    } else {
+      setPreviewUrl(null);
+    }
+
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+        setPreviewUrl(null);
+      }
+    };
+  }, [asset, isOpen]);
 
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -257,12 +296,20 @@ const AssetModal = ({ asset, isOpen, onClose, onDownload }: AssetModalProps) => 
 
             {/* Preview */}
             <div style={previewContainerStyles}>
-              {asset.thumbnail ? (
+              {previewUrl ? (
+                <img src={previewUrl} alt={asset.name} style={previewImageStyles} />
+              ) : asset.thumbnail ? (
                 <img src={asset.thumbnail} alt={asset.name} style={previewImageStyles} />
               ) : (
                 <div style={placeholderStyles(getTypeColor(asset.type))}>
-                  {getFileIcon(asset.type, 64)}
-                  <span style={{ color: "#9ca3af", fontSize: "0.9rem" }}>No Preview Available</span>
+                  {isLoadingPreview ? (
+                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900">Attributes...</div> // Simple loading text or spinner
+                  ) : (
+                    <>
+                      {getFileIcon(asset.type, 64)}
+                      <span style={{ color: "#9ca3af", fontSize: "0.9rem" }}>No Preview Available</span>
+                    </>
+                  )}
                 </div>
               )}
             </div>

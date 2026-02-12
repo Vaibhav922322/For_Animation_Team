@@ -141,3 +141,24 @@ export const downloadFile = async (
     xhr.send(JSON.stringify(body));
   });
 };
+
+export const previewFile = async (
+  host_ip: string,
+  shared_folder_name: string,
+  file_path: string
+): Promise<Blob> => {
+  const url = `${API_BASE_URL}/download/`;
+  const body = { host_ip, shared_folder_name, file_path };
+  
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch preview');
+  }
+
+  return response.blob();
+};

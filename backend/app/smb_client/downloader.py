@@ -103,13 +103,18 @@ class SBMDownloader:
                 # Otherwise, it's a file: use streaming
                 # Do NOT close conn here; streamer will close it.
                 from .streamer import SMBStreamer
+                import mimetypes
+                
+                mime_type, _ = mimetypes.guess_type(name)
+                final_media_type = mime_type or "application/octet-stream"
+
                 streamer = SMBStreamer(conn, sharedFolder, normalized_path)
                 streamer.start()
                 
                 return FileDownloadData(
                     file_name=name or "download", 
                     file_path="",  # No local path for streams
-                    media_type="application/octet-stream",
+                    media_type=final_media_type,
                     file_size=file_size,
                     stream=streamer.generator()
                 )
