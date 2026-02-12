@@ -8,6 +8,7 @@ import SplitText from "./components/SplitText";
 import ShinyText from "./components/ShinyText";
 import Antigravity from "./components/Antigravity";
 import DownloadOverlay from "./components/DownloadOverlay";
+import RefreshOverlay from "./components/RefreshOverlay";
 import { findFiles, refreshFiles, downloadFile, type FileMetadata } from "./services/api";
 
 // Helper to map API metadata to Asset interface
@@ -30,6 +31,7 @@ const mapMetadataToAsset = (file: FileMetadata): Asset => {
     date: "Unknown", // API doesn't provide date
     // Store original metadata for download
     host_ip: file.host_ip,
+    host_name: file.host_ip, // Use IP as hostname for now
     shared_folder_name: file.shared_folder_name,
     file_path: file.file_path,
   };
@@ -175,6 +177,8 @@ function App() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(-1);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   
   const [assets, setAssets] = useState<Asset[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -230,16 +234,19 @@ function App() {
     
     if (host_ip && shared_folder_name && file_path) {
       try {
+        setDownloadProgress(-1);
         await downloadFile(
           host_ip,
           shared_folder_name,
           file_path,
           () => setIsDownloading(true),
-          () => setIsDownloading(false)
+          () => { setIsDownloading(false); setDownloadProgress(-1); },
+          (percent) => setDownloadProgress(percent)
         );
       } catch (err) {
         console.error(err);
         setIsDownloading(false);
+        setDownloadProgress(-1);
         setError("Download failed: " + (err as Error).message);
       }
     } else {
@@ -248,14 +255,16 @@ function App() {
   };
   
   const handleRefresh = async () => {
+    setIsRefreshing(true);
     try {
       await refreshFiles();
-      alert("Refresh completed successfully");
-      // Optionally re-search if query exists
+      // Re-search if query exists
       if (searchQuery) handleSearch(searchQuery);
     } catch (err) {
       console.error(err);
-      alert("Refresh failed");
+      setError("Refresh failed");
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -269,7 +278,9 @@ function App() {
   return (
     <>
       {/* Download Overlay */}
-      <DownloadOverlay isVisible={isDownloading} />
+      <DownloadOverlay isVisible={isDownloading} progress={downloadProgress} />
+      {/* Refresh Overlay */}
+      <RefreshOverlay isVisible={isRefreshing} />
       {/* Antigravity Background */}
       <div style={backgroundStyles}>
         <Antigravity

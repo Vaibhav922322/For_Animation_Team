@@ -12,6 +12,7 @@ export interface Asset {
   size?: string;
   date?: string;
   host_ip?: string;
+  host_name?: string;
   shared_folder_name?: string;
   file_path?: string;
 }
@@ -233,6 +234,11 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
           </span>
           {asset.size && <span style={sizeStyles}>{asset.size}</span>}
         </div>
+        {asset.host_name && (
+          <div style={{ fontSize: "0.7rem", color: "#94a3b8", marginTop: "4px", display: "flex", alignItems: "center", gap: "4px" }}>
+            🖥️ {asset.host_name}
+          </div>
+        )}
       </div>
     </div>
   );

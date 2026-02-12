@@ -64,7 +64,8 @@ export const downloadFile = async (
   shared_folder_name: string,
   file_path: string,
   onStart?: () => void,
-  onEnd?: () => void
+  onEnd?: () => void,
+  onProgress?: (percent: number) => void
 ): Promise<void> => {
   const url = `${API_BASE_URL}/download/`;
   const body = { host_ip, shared_folder_name, file_path };
@@ -82,8 +83,11 @@ export const downloadFile = async (
       if (event.lengthComputable) {
         const percent = Math.round((event.loaded / event.total) * 100);
         console.log(`[API] Download progress: ${percent}%`);
+        onProgress?.(percent);
       } else {
-        console.log(`[API] Downloaded ${(event.loaded / 1024 / 1024).toFixed(1)} MB`);
+        const mb = (event.loaded / 1024 / 1024).toFixed(1);
+        console.log(`[API] Downloaded ${mb} MB`);
+        onProgress?.(-1); // indeterminate
       }
     };
 
