@@ -35,7 +35,7 @@ class SBMFileExplorer:
                 if list_files:
                     for share in shares:
                         print(f"\n  --- Walking share: {share} ---")
-                        found = SMBHelper.walk_share(conn, share, start_path="/") #, max_depth=args.max_depth)
+                        found = SMBHelper.walk_share(conn, share, hostname, start_path="/") #, max_depth=args.max_depth)
                         all_discovered_files.extend(found)
 
             finally:
@@ -66,8 +66,8 @@ class SBMFileExplorer:
             with open(output_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
             
-            # Filter objects where file_name contains the query (case-insensitive)
-            results = [obj for obj in data if query.lower() in obj.get("file_name", "").lower()]
+            # Filter objects where file_name contains the query (case-insensitive) and file_size > 0
+            results = [obj for obj in data if query.lower() in obj.get("file_name", "").lower() and obj.get("file_size", 0) > 0]
             return results
         except FileNotFoundError:
             print(f"[-] File {output_file} not found.")

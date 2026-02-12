@@ -19,6 +19,7 @@ def create_app() -> FastAPI:
         allow_credentials=True,
         allow_methods=["*"],  # Allows all methods
         allow_headers=["*"],  # Allows all headers
+        expose_headers=["Content-Length", "Content-Disposition"], # Expose Content-Length for progress bar
     )
     
     return app

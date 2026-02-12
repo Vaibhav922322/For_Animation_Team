@@ -15,7 +15,7 @@ class SMBHelper:
             shares.append(s.name)
         return shares
 
-    def walk_share(conn: SMBConnection, share: str, start_path: str = "/", max_depth: int = 1) -> List[FileMetadata]:
+    def walk_share(conn: SMBConnection, share: str, hostname: str, start_path: str = "/", max_depth: int = 1) -> List[FileMetadata]:
         """
         Recursively lists files/folders up to max_depth to avoid huge scans.
         Returns a list of discovered file paths (formatted strings).
@@ -45,7 +45,8 @@ class SMBHelper:
                         file_size=f.file_size,
                         is_file=is_file,
                         host= GlobalData.ip_to_author.get(conn.remote_name),
-                        host_ip=conn.remote_name
+                        host_ip=conn.remote_name,
+                        host_name=hostname
                     )
 
                     if f.isDirectory:

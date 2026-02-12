@@ -31,7 +31,7 @@ const mapMetadataToAsset = (file: FileMetadata): Asset => {
     date: "Unknown", // API doesn't provide date
     // Store original metadata for download
     host_ip: file.host_ip,
-    host_name: file.host_ip, // Use IP as hostname for now
+    host_name: file.host_name || file.host_ip, // Use hostname if available, else IP
     shared_folder_name: file.shared_folder_name,
     file_path: file.file_path,
   };
