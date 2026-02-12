@@ -187,18 +187,20 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     let active = true;
 
     if (isVisible && isImage && !previewUrl && !isLoadingPreview) {
+      // console.log("[AssetCard] Fetching preview for:", asset.name);
       setIsLoadingPreview(true);
       const { host_ip, shared_folder_name, file_path } = asset as any;
       
       previewFile(host_ip, shared_folder_name, file_path)
         .then((blob) => {
           if (active) {
+            // console.log("[AssetCard] Got blob:", asset.name, blob.type, blob.size);
             const url = URL.createObjectURL(blob);
             setPreviewUrl(url);
           }
         })
-        .catch(() => {
-          // Silent fail for grid previews
+        .catch((err) => {
+          console.error("[AssetCard] Preview failed:", asset.name, err);
         })
         .finally(() => {
           if (active) setIsLoadingPreview(false);

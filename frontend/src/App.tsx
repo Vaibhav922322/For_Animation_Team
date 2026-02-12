@@ -1,4 +1,5 @@
-import { useState, useMemo, type CSSProperties } from "react";
+import { useState, useMemo, useEffect, type CSSProperties } from "react";
+import { ChevronRight, Home } from "lucide-react";
 import { SearchBar } from "./components/SearchBar";
 import AssetGrid from "./components/AssetGrid";
 import AssetModal from "./components/AssetModal";
@@ -173,6 +174,7 @@ const placeholderTextStyles: CSSProperties = {
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPath, setCurrentPath] = useState("/"); // Default to root
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const [activeSort, setActiveSort] = useState<SortType>("name-asc");
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
@@ -203,31 +205,56 @@ function App() {
     return results;
   }, [assets, activeFilter, activeSort]);
 
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query);
-    if (!query.trim()) {
-      setAssets([]); // Clear results if query is empty
-      return;
-    }
-    
+  // Fetch logic
+  const fetchAssets = async (query: string, path: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      const metadata = await findFiles(query);
-      const mappedAssets = metadata.map(mapMetadataToAsset);
+      // If query exists, global search (path ignored/undefined). Else browse path.
+      const files = await findFiles(query || undefined, query ? undefined : path);
+      const mappedAssets = files.map(mapMetadataToAsset);
       setAssets(mappedAssets);
     } catch (err) {
-      console.error(err);
-      setError("Failed to fetch assets. Please make sure the backend is running.");
-      setAssets([]);
+      console.error("Failed to fetch assets:", err);
+      setError("Failed to load assets. Check backend connection.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Initial load & Search/Path change
+  useEffect(() => {
+    fetchAssets(searchQuery, currentPath);
+  }, [searchQuery, currentPath]);
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    // If searching, we effectively leave current path context (Global Search)
+    // Or we could search within path? Let's stick to Global Search logic for now as per plan
+    if (query) {
+      // Logic handled in useEffect
+    } else {
+      // If cleared, go back to currentPath viewing
+    }
+  };
+
+  const handleNavigate = (path: string) => {
+    setSearchQuery(""); // Clear search when browsing
+    setCurrentPath(path);
+  };
+
   const handleAssetClick = (asset: Asset) => {
-    setSelectedAsset(asset);
-    setIsModalOpen(true);
+    if (asset.is_file) {
+      setSelectedAsset(asset);
+      setIsModalOpen(true);
+    } else {
+      // It's a folder -> Navigate
+      // asset.file_path should be the absolute path of the folder (relative to share?)
+      // backend returns full path relative to share.
+      if (asset.file_path) {
+        handleNavigate(asset.file_path);
+      }
+    }
   };
 
   const handleAssetDownload = async (asset: Asset) => {
@@ -259,8 +286,9 @@ function App() {
     setIsRefreshing(true);
     try {
       await refreshFiles();
-      // Re-search if query exists
+      // Re-search if query exists, or re-fetch current path
       if (searchQuery) handleSearch(searchQuery);
+      else fetchAssets("", currentPath);
     } catch (err) {
       console.error(err);
       setError("Refresh failed");
@@ -358,6 +386,38 @@ function App() {
               <h2 style={resultsTitleStyles}>
                 {searchQuery ? "Results for \"" + searchQuery + "\"" : "Browse Assets"}
               </h2>
+             {/* Breadcrumbs */}
+        {!searchQuery && (
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "16px 24px", color: "#4b5563", fontSize: "0.9rem" }}>
+            <div 
+              style={{ display: "flex", alignItems: "center", cursor: "pointer", color: currentPath === "/" ? "#1e293b" : "#6b7280" }}
+              onClick={() => handleNavigate("/")}
+            >
+              <Home size={16} />
+            </div>
+            {currentPath !== "/" && currentPath.split("/").filter(Boolean).map((segment, index, array) => {
+              const path = "/" + array.slice(0, index + 1).join("/");
+              const isLast = index === array.length - 1;
+              return (
+                <div key={path} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <ChevronRight size={14} color="#9ca3af" />
+                  <span 
+                    style={{ 
+                      cursor: isLast ? "default" : "pointer", 
+                      fontWeight: isLast ? 600 : 400,
+                      color: isLast ? "#1e293b" : "#6b7280"
+                    }}
+                    onClick={() => !isLast && handleNavigate(path)}
+                  >
+                    {segment}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Filters */}
               <FilterBar
                 activeFilter={activeFilter}
                 activeSort={activeSort}

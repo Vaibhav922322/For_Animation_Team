@@ -41,6 +41,7 @@ class SMBHelper:
                         full_unc_path=full_unc_path,
                         file_path=full,
                         file_name=name,
+                        parent_path=path,  # The current directory being scanned is the parent
                         shared_folder_name=share,
                         file_size=f.file_size,
                         is_file=is_file,

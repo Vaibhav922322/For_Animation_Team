@@ -60,15 +60,29 @@ class SBMFileExplorer:
         else:
             print("\n[-] No files found to save.")
 
-    def search_files(query: str):
+    def search_files(query: str = None, directory_path: str = None):
         output_file = "smb_discovered_files.txt"
         try:
             with open(output_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
             
-            # Filter objects where file_name contains the query (case-insensitive)
-            # Removed file_size > 0 check to allow folders and empty files
-            results = [obj for obj in data if query.lower() in obj.get("file_name", "").lower()]
+            results = []
+            if directory_path:
+                # Browse Mode: Filter by parent path
+                # Handle root case: directory_path="/" should match parent_path="/"
+                target_dir = directory_path.rstrip("/") if directory_path != "/" else "/"
+                results = [obj for obj in data if obj.get("parent_path") == target_dir]
+                
+                # If query also present, filter by name within folder
+                if query:
+                    results = [obj for obj in results if query.lower() in obj.get("file_name", "").lower()]
+            elif query:
+                # Search Mode (Global): Filter by name
+                results = [obj for obj in data if query.lower() in obj.get("file_name", "").lower()]
+            else:
+                # Root Mode: Show root files (parent_path == "/")
+                results = [obj for obj in data if obj.get("parent_path") == "/"]
+
             return results
         except FileNotFoundError:
             print(f"[-] File {output_file} not found.")

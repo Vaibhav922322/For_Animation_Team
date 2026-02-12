@@ -5,13 +5,13 @@ from smb_client.explorer import SBMFileExplorer
 router = APIRouter()
 
 @router.get("/")
-def smb_find(fileName: str) -> List[Dict[str, Any]]:
+def smb_find(fileName: str = None, directory_path: str = None) -> List[Dict[str, Any]]:
     """
-    Search for files matching the fileName query in the locally cached discovery file.
+    Search for files matching the fileName query OR list files in directory_path.
     Returns a list of file metadata objects.
     """
     # Search for files using the explorer utility
-    results = SBMFileExplorer.search_files(query=fileName)
+    results = SBMFileExplorer.search_files(query=fileName, directory_path=directory_path)
     
     # Return directly; FastAPI handles JSON serialization
     return results
