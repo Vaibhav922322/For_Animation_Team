@@ -1,5 +1,7 @@
-import { type CSSProperties } from "react";
-import { Download, FileBox, Image, Film, File } from "lucide-react";
+import { useRef, useState, useEffect, type CSSProperties } from "react";
+import { Download, FileBox, Image, Film, File, Folder } from "lucide-react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { previewFile } from "../services/api";
 
 // =============================================================================
 // Types
@@ -15,6 +17,7 @@ export interface Asset {
   host_name?: string;
   shared_folder_name?: string;
   file_path?: string;
+  is_file: boolean;
 }
 
 interface AssetCardProps {
@@ -38,6 +41,8 @@ const getFileIcon = (type: Asset["type"]) => {
       return <File size={24} />;
   }
 };
+
+const getFolderIcon = () => <Folder size={24} />;
 
 const getTypeColor = (type: Asset["type"]) => {
   switch (type) {
@@ -170,14 +175,63 @@ const sizeStyles: CSSProperties = {
 // Component
 // =============================================================================
 const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(cardRef, { threshold: 0.1 });
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+
+  // Determine if valid image for preview
+  const isImage = asset.is_file && (asset.type === "texture" || asset.name.match(/\.(jpg|jpeg|png|gif|webp)$/i));
+
+  useEffect(() => {
+    let active = true;
+
+    if (isVisible && isImage && !previewUrl && !isLoadingPreview) {
+      setIsLoadingPreview(true);
+      const { host_ip, shared_folder_name, file_path } = asset as any;
+      
+      previewFile(host_ip, shared_folder_name, file_path)
+        .then((blob) => {
+          if (active) {
+            const url = URL.createObjectURL(blob);
+            setPreviewUrl(url);
+          }
+        })
+        .catch(() => {
+          // Silent fail for grid previews
+        })
+        .finally(() => {
+          if (active) setIsLoadingPreview(false);
+        });
+    }
+
+    return () => {
+      active = false;
+    };
+  }, [isVisible, isImage, asset, previewUrl, isLoadingPreview]);
+
+  // Cleanup object URL
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
+
   const handleDownloadClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onDownload(e);
   };
 
+  const isFolder = !asset.is_file;
+
   return (
     <div
-      style={cardStyles}
+      ref={cardRef}
+      style={{
+        ...cardStyles,
+        borderColor: isFolder ? "#fbbf24" : "#e5e7eb", // Amber for folders
+        backgroundColor: isFolder ? "#fffbeb" : "#ffffff",
+      }}
       onClick={onClick}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-4px)";
@@ -192,14 +246,16 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     >
       {/* Thumbnail */}
       <div style={thumbnailContainerStyles}>
-        {asset.thumbnail ? (
+        {previewUrl ? (
+           <img src={previewUrl} alt={asset.name} style={thumbnailStyles} />
+        ) : asset.thumbnail ? (
           <img src={asset.thumbnail} alt={asset.name} style={thumbnailStyles} />
         ) : (
           <div style={placeholderStyles}>
-            <div style={{ color: getTypeColor(asset.type) }}>
-              {getFileIcon(asset.type)}
+            <div style={{ color: isFolder ? "#f59e0b" : getTypeColor(asset.type) }}>
+              {isFolder ? getFolderIcon() : getFileIcon(asset.type)}
             </div>
-            <span style={{ fontSize: "0.75rem" }}>No Preview</span>
+            <span style={{ fontSize: "0.75rem" }}>{isFolder ? "Folder" : "No Preview"}</span>
           </div>
         )}
       </div>
@@ -229,8 +285,8 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
 
         <div style={metaStyles}>
           <span style={typeTagStyles(asset.type)}>
-            {getFileIcon(asset.type)}
-            {asset.type.charAt(0).toUpperCase() + asset.type.slice(1)}
+            {isFolder ? getFolderIcon() : getFileIcon(asset.type)}
+            {isFolder ? "Folder" : asset.type.charAt(0).toUpperCase() + asset.type.slice(1)}
           </span>
           {asset.size && <span style={sizeStyles}>{asset.size}</span>}
         </div>

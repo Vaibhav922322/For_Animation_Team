@@ -34,6 +34,7 @@ const mapMetadataToAsset = (file: FileMetadata): Asset => {
     host_name: file.host_name || file.host_ip, // Use hostname if available, else IP
     shared_folder_name: file.shared_folder_name,
     file_path: file.file_path,
+    is_file: file.is_file,
   };
 };
 

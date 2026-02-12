@@ -66,8 +66,9 @@ class SBMFileExplorer:
             with open(output_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
             
-            # Filter objects where file_name contains the query (case-insensitive) and file_size > 0
-            results = [obj for obj in data if query.lower() in obj.get("file_name", "").lower() and obj.get("file_size", 0) > 0]
+            # Filter objects where file_name contains the query (case-insensitive)
+            # Removed file_size > 0 check to allow folders and empty files
+            results = [obj for obj in data if query.lower() in obj.get("file_name", "").lower()]
             return results
         except FileNotFoundError:
             print(f"[-] File {output_file} not found.")
