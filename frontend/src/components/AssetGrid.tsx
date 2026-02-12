@@ -1,4 +1,5 @@
 import { type CSSProperties } from "react";
+import { motion } from "motion/react";
 import AssetCard, { type Asset } from "./AssetCard";
 
 interface AssetGridProps {
@@ -39,6 +40,32 @@ const emptyTextStyles: CSSProperties = {
 };
 
 // =============================================================================
+// Animation Variants
+// =============================================================================
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut" as const,
+    },
+  },
+};
+
+// =============================================================================
 // Component
 // =============================================================================
 const AssetGrid = ({ assets, onAssetClick, onAssetDownload }: AssetGridProps) => {
@@ -53,17 +80,23 @@ const AssetGrid = ({ assets, onAssetClick, onAssetDownload }: AssetGridProps) =>
 
   return (
     <div style={gridContainerStyles}>
-      <div style={gridStyles}>
+      <motion.div
+        style={gridStyles}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        key={assets.length}
+      >
         {assets.map((asset, index) => (
-          <div key={`${asset.id}-${index}`}>
+          <motion.div key={`${asset.id}-${index}`} variants={itemVariants}>
             <AssetCard
               asset={asset}
               onClick={() => onAssetClick(asset)}
               onDownload={() => onAssetDownload(asset)}
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
