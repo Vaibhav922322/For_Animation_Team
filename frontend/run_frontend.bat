@@ -4,7 +4,18 @@ echo   Frontend Server Starting...
 echo ===============================
 echo.
 
-REM Check if Python is available
+REM Try to find Python in order of preference:
+REM 1. Bundled Python from backend runtime
+REM 2. System Python
+
+set BUNDLED_PYTHON=%~dp0..\backend\runtime\python_for_windows\python.exe
+
+if exist "%BUNDLED_PYTHON%" (
+    set PYTHON_CMD="%BUNDLED_PYTHON%"
+    echo [INFO] Using bundled Python from backend runtime
+    goto :findport
+)
+
 where python >nul 2>nul
 if %ERRORLEVEL% EQU 0 (
     set PYTHON_CMD=python
@@ -15,8 +26,13 @@ if %ERRORLEVEL% EQU 0 (
     set PYTHON_CMD=python3
     goto :findport
 )
+where py >nul 2>nul
+if %ERRORLEVEL% EQU 0 (
+    set PYTHON_CMD=py
+    goto :findport
+)
 
-echo [ERROR] Python is not installed or not in PATH.
+echo [ERROR] Python is not installed and bundled Python not found.
 pause
 exit /b 1
 
@@ -25,7 +41,12 @@ REM Read the backend port from server_connection.json
 set CONFIG_FILE=%~dp0..\server_connection.json
 
 if not exist "%CONFIG_FILE%" (
-    echo [WARNING] server_connection.json not found at %CONFIG_FILE%
+    REM Also check inside backend folder
+    set CONFIG_FILE=%~dp0..\backend\server_connection.json
+)
+
+if not exist "%CONFIG_FILE%" (
+    echo [WARNING] server_connection.json not found!
     echo [WARNING] Make sure the backend is running first!
     echo [INFO] Using default port 8000
     set BACKEND_PORT=8000
