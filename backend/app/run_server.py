@@ -31,11 +31,30 @@ def get_open_port():
     return port
 
 
+def get_local_ip():
+    try:
+        # Create a dummy socket to connect to an external IP (doesn't actually connect)
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        local_ip = s.getsockname()[0]
+        s.close()
+        return local_ip
+    except Exception:
+        return "127.0.0.1"
+
 def main():
     try:        
-        host = "127.0.0.1"
+        # Use 0.0.0.0 to bind to all interfaces for remote access
+        host = "0.0.0.0"
         port = get_open_port()
-        save_server_connection(server_ip=host, port=port)
+        
+        # Get LAN IP for the frontend to connect to
+        lan_ip = get_local_ip()
+        print(f"[INFO] Backend will be available at http://{lan_ip}:{port}")
+        
+        # Save the LAN IP so frontend knows where to connect
+        save_server_connection(server_ip=lan_ip, port=port)
+        
         uvicorn.run("main:app", host=host, port=port, reload=False)
 
     except Exception as e:
