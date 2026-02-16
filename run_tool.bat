@@ -2,10 +2,10 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 REM ===== CONFIG =====
-set "PYTHON_DIR=runtime\python_for_windows"
-set "VENV_DIR=runtime\backend_env_window"
-set "REQ_FILE=requirements.txt"
-set "APP_FILE=app\run_server.py"
+set "PYTHON_DIR=backend\runtime\python_for_windows"
+set "VENV_DIR=backend\runtime\backend_env_window"
+set "REQ_FILE=backend\requirements.txt"
+set "APP_FILE=backend\app\run_server.py"
 REM ==================
 
 echo ===============================
@@ -43,20 +43,18 @@ if exist "%VENV_PY%" (
     )
 )
 
-REM 3. Run backend
-if not exist "%APP_FILE%" (
-    echo [ERROR] App file not found: %APP_FILE%
-    pause
-    exit /b 1
-)
 
-echo [INFO] Starting backend...
-"%VENV_PY%" "%APP_FILE%"
+
+REM 3. Run launch.py
+echo [INFO] Running launch.py...
+"%VENV_PY%" "start_services.py"
 
 echo.
-echo Backend exited with code %errorlevel%
+echo Services exited with code %errorlevel%
 pause
 exit /b %errorlevel%
+
+
 
 REM ===== ERROR HANDLER =====
 :VENV_FAIL
