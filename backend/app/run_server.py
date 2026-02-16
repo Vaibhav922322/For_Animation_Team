@@ -44,6 +44,35 @@ def get_local_ip():
     except Exception:
         return "127.0.0.1"
 
+# ... imports remaining same ...
+from main import app # Direct import to avoid string-based 'uvicorn.run' issues
+
+# ... get_server_connection_file_path, save_server_connection, get_open_port, get_local_ip remain same ...
+# But I need to ensure get_open_port is used.
+
+def generate_frontend_config(server_ip: str, port: int):
+    # Determine the static directory (frontend files)
+    # parent -> backend/app
+    # parent/static -> backend/app/static
+    base_dir = Path(__file__).resolve().parent
+    static_dir = base_dir / "static"
+    config_path = static_dir / "config.js"
+    
+    # Check if static dir exists (it should in the bundled exe)
+    if not static_dir.exists():
+        print(f"[WARNING] Static directory not found at {static_dir}. Config.js not generated.")
+        return
+
+    api_url = f"http://{server_ip}:{port}"
+    config_content = f"window.env = {{ API_BASE_URL: '{api_url}' }};"
+    
+    try:
+        with open(config_path, "w") as f:
+            f.write(config_content)
+        print(f"[INFO] Generated frontend config at {config_path} with API_URL={api_url}")
+    except Exception as e:
+        print(f"[ERROR] Failed to write config.js: {e}")
+
 def main():
     import webbrowser
     from threading import Timer
@@ -55,20 +84,26 @@ def main():
     try:        
         # Use 0.0.0.0 to bind to all interfaces for remote access
         host = "0.0.0.0"
-        # port = get_open_port() 
-        port = 8000 # Fix port to 8000 for consistency
+        
+        # Use dynamic port as requested by user
+        port = get_open_port() 
+        # port = 8000 # Fixed port removed
         
         # Get LAN IP for the frontend to connect to
         lan_ip = get_local_ip()
         print(f"[INFO] Backend will be available at http://{lan_ip}:{port}")
         
-        # Save the LAN IP so frontend knows where to connect
+        # Save the LAN IP so frontend knows where to connect (Legacy support)
         save_server_connection(server_ip=lan_ip, port=port)
+
+        # Generate config.js for the unified frontend (StaticFiles)
+        generate_frontend_config(server_ip=lan_ip, port=port)
         
         # Open browser after 1.5 seconds default to localhost for the host machine
         Timer(1.5, open_browser, args=[f"http://localhost:{port}"]).start()
 
-        uvicorn.run("main:app", host=host, port=port, reload=False)
+        # Pass the imported 'app' object directly to avoid import errors
+        uvicorn.run(app, host=host, port=port, reload=False)
 
     except Exception as e:
         print(f"\nCRITICAL ERROR: {e}")
