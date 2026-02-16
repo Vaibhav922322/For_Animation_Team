@@ -48,22 +48,18 @@ def generate_frontend_config(server_ip: str, port: int):
     # project root/frontend/dist -> frontend build
     base_dir = Path(__file__).resolve().parent.parent.parent
     dist_dir = base_dir / "frontend" / "dist"
-    config_path = dist_dir / "config.js"
-    
-    # Check if dist dir exists
-    if not dist_dir.exists():
-        print(f"[WARNING] Frontend dist directory not found at {dist_dir}. Config.js not generated.")
-        return
-
-    api_url = f"http://{server_ip}:{port}"
-    config_content = f"window.env = {{ API_BASE_URL: '{api_url}' }};"
+    # Write config.json (Preferred)
+    config_json_path = dist_dir / "config.json"
+    config_data = {
+        "API_BASE_URL": api_url
+    }
     
     try:
-        with open(config_path, "w") as f:
-            f.write(config_content)
-        print(f"[INFO] Generated frontend config at {config_path} with API_URL={api_url}")
+        with open(config_json_path, "w") as f:
+            json.dump(config_data, f, indent=2)
+        print(f"[INFO] Generated frontend config at {config_json_path} with API_URL={api_url}")
     except Exception as e:
-        print(f"[ERROR] Failed to write config.js: {e}")
+        print(f"[ERROR] Failed to write config.json: {e}")
 
 def main():
     try:        
