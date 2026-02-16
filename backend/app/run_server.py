@@ -40,8 +40,30 @@ def get_local_ip():
         local_ip = s.getsockname()[0]
         s.close()
         return local_ip
-    except Exception:
-        return "127.0.0.1"
+def generate_frontend_config(server_ip: str, port: int):
+    # Determine the frontend dist directory (where built files live)
+    # parent -> backend/app
+    # parent.parent -> backend
+    # parent.parent.parent -> project root
+    # project root/frontend/dist -> frontend build
+    base_dir = Path(__file__).resolve().parent.parent.parent
+    dist_dir = base_dir / "frontend" / "dist"
+    config_path = dist_dir / "config.js"
+    
+    # Check if dist dir exists
+    if not dist_dir.exists():
+        print(f"[WARNING] Frontend dist directory not found at {dist_dir}. Config.js not generated.")
+        return
+
+    api_url = f"http://{server_ip}:{port}"
+    config_content = f"window.env = {{ API_BASE_URL: '{api_url}' }};"
+    
+    try:
+        with open(config_path, "w") as f:
+            f.write(config_content)
+        print(f"[INFO] Generated frontend config at {config_path} with API_URL={api_url}")
+    except Exception as e:
+        print(f"[ERROR] Failed to write config.js: {e}")
 
 def main():
     try:        
@@ -57,6 +79,9 @@ def main():
         
         # Save the LAN IP so frontend knows where to connect
         save_server_connection(server_ip=lan_ip, port=port)
+        
+        # Generate config.js for the standalone frontend build
+        generate_frontend_config(server_ip=lan_ip, port=port)
         
         uvicorn.run("main:app", host=host, port=port, reload=False)
 
