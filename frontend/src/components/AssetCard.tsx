@@ -1,15 +1,7 @@
 import { useRef, useState, useEffect, type CSSProperties } from "react";
-import { Download, FileBox, Image, Film, File, Folder, ImageOff } from "lucide-react";
+import { Download, FileBox, Image, Film, File, Folder } from "lucide-react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { previewFile } from "../services/api";
-
-// ... (Types and Helper functions remain unchanged - I will keep them but for brevity in replace I focus on component)
-// Wait, replace_file_content needs the whole block if I target the whole file. 
-// I will target imports first, then the component.
-
-// Actually, I can use multi_replace.
-// Let's use replace_file_content on imports first.
-
 
 // =============================================================================
 // Types
@@ -187,21 +179,14 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
   const isVisible = useIntersectionObserver(cardRef, { threshold: 0.1 });
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
-  const [hasError, setHasError] = useState(false);
 
-  // Determine if valid image for preview (Expanded regex)
-  const isImage = asset.is_file && (asset.type === "texture" || asset.name.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg|ico|tiff|tif)$/i));
-
-  // Reset error when asset changes
-  useEffect(() => {
-    setHasError(false);
-    setPreviewUrl(null);
-  }, [asset.id]);
+  // Determine if valid image for preview
+  const isImage = asset.is_file && (asset.type === "texture" || asset.name.match(/\.(jpg|jpeg|png|gif|webp)$/i));
 
   useEffect(() => {
     let active = true;
 
-    if (isVisible && isImage && !previewUrl && !isLoadingPreview && !hasError) {
+    if (isVisible && isImage && !previewUrl && !isLoadingPreview) {
       // console.log("[AssetCard] Fetching preview for:", asset.name);
       setIsLoadingPreview(true);
       const { host_ip, shared_folder_name, file_path } = asset as any;
@@ -210,18 +195,12 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
         .then((blob) => {
           if (active) {
             // console.log("[AssetCard] Got blob:", asset.name, blob.type, blob.size);
-            if (blob.size === 0) {
-                // console.warn("[AssetCard] Empty blob received");
-                setHasError(true);
-                return;
-            }
             const url = URL.createObjectURL(blob);
             setPreviewUrl(url);
           }
         })
         .catch((err) => {
           console.error("[AssetCard] Preview failed:", asset.name, err);
-          if (active) setHasError(true);
         })
         .finally(() => {
           if (active) setIsLoadingPreview(false);
@@ -231,7 +210,7 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     return () => {
       active = false;
     };
-  }, [isVisible, isImage, asset, previewUrl, isLoadingPreview, hasError]);
+  }, [isVisible, isImage, asset, previewUrl, isLoadingPreview]);
 
   // Cleanup object URL
   useEffect(() => {
@@ -269,28 +248,16 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     >
       {/* Thumbnail */}
       <div style={thumbnailContainerStyles}>
-        {previewUrl && !hasError ? (
-           <img 
-             src={previewUrl} 
-             alt={asset.name} 
-             style={thumbnailStyles} 
-             onError={() => setHasError(true)}
-           />
-        ) : asset.thumbnail && !hasError ? (
-           <img 
-             src={asset.thumbnail} 
-             alt={asset.name} 
-             style={thumbnailStyles}
-             onError={() => setHasError(true)} 
-           />
+        {previewUrl ? (
+           <img src={previewUrl} alt={asset.name} style={thumbnailStyles} />
+        ) : asset.thumbnail ? (
+          <img src={asset.thumbnail} alt={asset.name} style={thumbnailStyles} />
         ) : (
           <div style={placeholderStyles}>
-            <div style={{ color: hasError ? "#ef4444" : (isFolder ? "#f59e0b" : getTypeColor(asset.type)) }}>
-              {hasError ? <ImageOff size={24} /> : (isFolder ? getFolderIcon() : getFileIcon(asset.type))}
+            <div style={{ color: isFolder ? "#f59e0b" : getTypeColor(asset.type) }}>
+              {isFolder ? getFolderIcon() : getFileIcon(asset.type)}
             </div>
-            <span style={{ fontSize: "0.75rem" }}>
-                {hasError ? "Preview Failed" : (isFolder ? "Folder" : "No Preview")}
-            </span>
+            <span style={{ fontSize: "0.75rem" }}>{isFolder ? "Folder" : "No Preview"}</span>
           </div>
         )}
       </div>
