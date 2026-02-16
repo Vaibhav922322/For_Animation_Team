@@ -48,6 +48,14 @@ def generate_frontend_config(server_ip: str, port: int):
     # project root/frontend/dist -> frontend build
     base_dir = Path(__file__).resolve().parent.parent.parent
     dist_dir = base_dir / "frontend" / "dist"
+    
+    # Check if dist dir exists
+    if not dist_dir.exists():
+        print(f"[WARNING] Frontend dist directory not found at {dist_dir}. Config.json not generated.")
+        return
+
+    api_url = f"http://{server_ip}:{port}"
+
     # Write config.json (Preferred)
     config_json_path = dist_dir / "config.json"
     config_data = {
