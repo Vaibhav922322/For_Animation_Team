@@ -9,8 +9,8 @@ def create_app() -> FastAPI:
     # add all routes from routes/ in one shot
     app.include_router(api_router)
     # Start the file scan synchronously to block server startup until complete
-    print("Starting synchronous file scan. The server will not accept requests until this finishes...")
-    SBMFileExplorer.get_all_files()
+    # print("Starting synchronous file scan. The server will not accept requests until this finishes...")
+    # SBMFileExplorer.get_all_files()
     print("File scan completed. Server is now ready.")
 
     app.add_middleware(
