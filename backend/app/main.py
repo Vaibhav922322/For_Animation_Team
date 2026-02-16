@@ -3,25 +3,15 @@ from apis.routes import router as api_router
 from smb_client.explorer import SBMFileExplorer
 from fastapi.middleware.cors import CORSMiddleware
 
-from contextlib import asynccontextmanager
-import threading
-
-# Use lifespan to handle startup events without blocking the main thread
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Run the file scan in a separate thread so it doesn't block the event loop or server startup
-    print("[INFO] Initiating background file scan...")
-    scan_thread = threading.Thread(target=SBMFileExplorer.get_all_files)
-    scan_thread.daemon = True
-    scan_thread.start()
-    yield
-    print("[INFO] Server shutting down...")
-
 def create_app() -> FastAPI:
-    app = FastAPI(title="My API", version="1.0.0", lifespan=lifespan)
+    app = FastAPI(title="My API", version="1.0.0")
 
     # add all routes from routes/ in one shot
     app.include_router(api_router)
+    # Start the file scan synchronously to block server startup until complete
+    print("Starting synchronous file scan. The server will not accept requests until this finishes...")
+    SBMFileExplorer.get_all_files()
+    print("File scan completed. Server is now ready.")
 
     app.add_middleware(
         CORSMiddleware,
