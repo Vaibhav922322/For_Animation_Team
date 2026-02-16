@@ -37,9 +37,9 @@ def get_local_ip():
         # Create a dummy socket to connect to an external IP (doesn't actually connect)
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(("8.8.8.8", 80))
-        local_ip = s.getsockname()[0]
-        s.close()
-        return local_ip
+    except Exception:
+        return "127.0.0.1"
+
 def generate_frontend_config(server_ip: str, port: int):
     # Determine the frontend dist directory (where built files live)
     # parent -> backend/app
