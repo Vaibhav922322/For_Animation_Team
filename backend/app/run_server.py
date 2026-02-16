@@ -4,9 +4,11 @@ import json
 from pathlib import Path
 
 def get_server_connection_file_path():
-
-    parent_dir = Path.cwd().parent
-    file_path = parent_dir / "server_connection.json"
+    # Robustly find path relative to this script (backend/app/run_server.py)
+    # parent -> backend/app
+    # parent.parent -> backend
+    base_dir = Path(__file__).resolve().parent.parent
+    file_path = base_dir / "server_connection.json"
     return file_path    
 
 def save_server_connection(server_ip : str, port: int):
@@ -30,12 +32,32 @@ def get_open_port():
     s.close()
     return port
 
+def get_local_ip():
+    try:
+        # Create a dummy socket to connect to an external IP (doesn't actually connect)
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        local_ip = s.getsockname()[0]
+        s.close()
+        return local_ip
+    except Exception:
+        return "127.0.0.1"
 
 def main():
     try:        
-        host = "127.0.0.1"
-        port = get_open_port()
-        save_server_connection(server_ip=host, port=port)
+        # Use 0.0.0.0 to bind to all interfaces for remote access
+        host = "0.0.0.0"
+        
+        # Use dynamic port as requested by user
+        port = get_open_port() 
+        
+        # Get LAN IP for the frontend to connect to
+        lan_ip = get_local_ip()
+        print(f"[INFO] Backend will be available at http://{lan_ip}:{port}")
+        
+        # Save the LAN IP so frontend knows where to connect
+        save_server_connection(server_ip=lan_ip, port=port)
+        
         uvicorn.run("main:app", host=host, port=port, reload=False)
 
     except Exception as e:
