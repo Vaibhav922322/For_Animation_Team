@@ -45,6 +45,13 @@ def get_local_ip():
         return "127.0.0.1"
 
 def main():
+    import webbrowser
+    from threading import Timer
+
+    def open_browser(url):
+        print(f"[INFO] Opening browser at {url}")
+        webbrowser.open(url)
+
     try:        
         # Use 0.0.0.0 to bind to all interfaces for remote access
         host = "0.0.0.0"
@@ -58,6 +65,9 @@ def main():
         # Save the LAN IP so frontend knows where to connect
         save_server_connection(server_ip=lan_ip, port=port)
         
+        # Open browser after 1.5 seconds default to localhost for the host machine
+        Timer(1.5, open_browser, args=[f"http://localhost:{port}"]).start()
+
         uvicorn.run("main:app", host=host, port=port, reload=False)
 
     except Exception as e:

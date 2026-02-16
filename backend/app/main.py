@@ -21,6 +21,16 @@ def create_app() -> FastAPI:
         allow_headers=["*"],  # Allows all headers
         expose_headers=["Content-Length", "Content-Disposition"], # Expose Content-Length for progress bar
     )
+
+    # Mount static frontend files if directory exists
+    import os
+    from fastapi.staticfiles import StaticFiles
+    
+    static_dir = os.path.join(os.path.dirname(__file__), "static")
+    if os.path.exists(static_dir):
+        app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+    else:
+        print(f"Warning: Static directory not found at {static_dir}. Frontend will not be served.")
     
     return app
 
