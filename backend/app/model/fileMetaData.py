@@ -1,4 +1,3 @@
-class FileMetadata:
     # given path is in format: \\<IP>\<sharedFolderName>\<file path (can have multiple folders) >\< the last one in path(fileName if file) or (folder name if folder)>
     def __init__(self, full_unc_path, file_path, file_name, parent_path, shared_folder_name, file_size, is_file, host, host_ip, host_name=""):
         self.full_unc_path = full_unc_path           # Full path of the file
