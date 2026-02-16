@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, type CSSProperties } from "react";
-import { Download, FileBox, Image, Film, File, Folder } from "lucide-react";
+import { Download, FileBox, Image, Film, File, Folder, ImageOff, Loader2, ImageIcon, FileText } from "lucide-react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { previewFile } from "../services/api";
 
@@ -95,10 +95,12 @@ const thumbnailContainerStyles: CSSProperties = {
   overflow: "hidden",
 };
 
-const thumbnailStyles: CSSProperties = {
+
+
+const imageStyles: CSSProperties = {
   width: "100%",
   height: "100%",
-  objectFit: "cover",
+  objectFit: "contain",
 };
 
 const placeholderStyles: CSSProperties = {
@@ -179,28 +181,40 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
   const isVisible = useIntersectionObserver(cardRef, { threshold: 0.1 });
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isLoadingPreview, setIsLoadingPreview] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
-  // Determine if valid image for preview
-  const isImage = asset.is_file && (asset.type === "texture" || asset.name.match(/\.(jpg|jpeg|png|gif|webp)$/i));
+  // Determine if valid image for preview (Expanded for robust support)
+  const isImage = asset.is_file && (
+    asset.type === "texture" || 
+    asset.name.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg|ico|tiff|tif|tga)$/i)
+  );
 
   useEffect(() => {
     let active = true;
 
-    if (isVisible && isImage && !previewUrl && !isLoadingPreview) {
-      // console.log("[AssetCard] Fetching preview for:", asset.name);
+    if (isVisible && isImage && !previewUrl && !isLoadingPreview && !hasError) {
       setIsLoadingPreview(true);
-      const { host_ip, shared_folder_name, file_path } = asset as any;
+      // Use asset directly without 'as any' - interface has optional fields
+      const host_ip = asset.host_ip || "";
+      const shared_folder_name = asset.shared_folder_name || "";
+      const file_path = asset.file_path || "";
       
       previewFile(host_ip, shared_folder_name, file_path)
         .then((blob) => {
           if (active) {
-            // console.log("[AssetCard] Got blob:", asset.name, blob.type, blob.size);
+            if (blob.size === 0 || blob.type.includes('text/html')) {
+                // Invalid blob received (sometimes 404 returns HTML)
+                console.warn("[AssetCard] Invalid preview blob:", asset.name);
+                setHasError(true);
+                return;
+            }
             const url = URL.createObjectURL(blob);
             setPreviewUrl(url);
           }
         })
         .catch((err) => {
           console.error("[AssetCard] Preview failed:", asset.name, err);
+          if (active) setHasError(true);
         })
         .finally(() => {
           if (active) setIsLoadingPreview(false);
@@ -210,7 +224,7 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     return () => {
       active = false;
     };
-  }, [isVisible, isImage, asset, previewUrl, isLoadingPreview]);
+  }, [isVisible, isImage, asset, previewUrl, isLoadingPreview, hasError]);
 
   // Cleanup object URL
   useEffect(() => {
@@ -218,6 +232,12 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);
     };
   }, [previewUrl]);
+
+  const handleError = () => {
+      setHasError(true);
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(null);
+  };
 
   const handleDownloadClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -248,17 +268,32 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     >
       {/* Thumbnail */}
       <div style={thumbnailContainerStyles}>
-        {previewUrl ? (
-           <img src={previewUrl} alt={asset.name} style={thumbnailStyles} />
-        ) : asset.thumbnail ? (
-          <img src={asset.thumbnail} alt={asset.name} style={thumbnailStyles} />
+        {isFolder ? (
+          <Folder size={48} color="#fbbf24" fill="#fbbf24" fillOpacity={0.2} />
+        ) : hasError ? (
+           <div style={placeholderStyles}>
+             <ImageOff size={32} />
+             <span style={{ fontSize: "0.75rem" }}>No Preview</span>
+           </div>
+        ) : previewUrl ? (
+          <img 
+            src={previewUrl} 
+            alt={asset.name} 
+            style={imageStyles} 
+            onError={handleError}
+            loading="lazy"
+          />
+        ) : isImage ? (
+           // While loading or waiting to load
+           <div style={placeholderStyles}>
+             {isLoadingPreview ? (
+                 <Loader2 className="animate-spin" size={24} />
+             ) : (
+                 <ImageIcon size={32} />
+             )}
+           </div>
         ) : (
-          <div style={placeholderStyles}>
-            <div style={{ color: isFolder ? "#f59e0b" : getTypeColor(asset.type) }}>
-              {isFolder ? getFolderIcon() : getFileIcon(asset.type)}
-            </div>
-            <span style={{ fontSize: "0.75rem" }}>{isFolder ? "Folder" : "No Preview"}</span>
-          </div>
+          <FileText size={48} color="#9ca3af" />
         )}
       </div>
 
