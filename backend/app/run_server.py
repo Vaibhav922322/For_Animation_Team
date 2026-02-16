@@ -4,11 +4,9 @@ import json
 from pathlib import Path
 
 def get_server_connection_file_path():
-    # Robustly find path relative to this script (backend/app/run_server.py)
-    # parent -> backend/app
-    # parent.parent -> backend
-    base_dir = Path(__file__).resolve().parent.parent
-    file_path = base_dir / "server_connection.json"
+
+    parent_dir = Path.cwd().parent
+    file_path = parent_dir / "server_connection.json"
     return file_path    
 
 def save_server_connection(server_ip : str, port: int):
@@ -48,8 +46,7 @@ def main():
     try:        
         # Use 0.0.0.0 to bind to all interfaces for remote access
         host = "0.0.0.0"
-        # port = get_open_port() 
-        port = 8000 # Fix port to 8000 for consistency
+        port = get_open_port()
         
         # Get LAN IP for the frontend to connect to
         lan_ip = get_local_ip()
