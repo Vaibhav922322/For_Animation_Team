@@ -111,7 +111,8 @@ const getConfig = async (): Promise<{ API_BASE_URL: string }> => {
     }
   }
 
-  // 2. Try config.json (Legacy/Backup)
+  // 2. Try config.json (Legacy/Backup) - REMOVED to force scanning if server_connection.json fails
+  /*
   try {
     console.log("[API] Trying /config.json...");
     const response = await fetch('/config.json');
@@ -125,6 +126,7 @@ const getConfig = async (): Promise<{ API_BASE_URL: string }> => {
   } catch (error) {
     console.warn("[API] Network error fetching /config.json:", error);
   }
+  */
 
   // 3. Fallback: Scan ports
   console.log("[API] All config files failed. Initiating Port Scan...");
