@@ -8,7 +8,7 @@ REM Try to find Python in order of preference:
 REM 1. Bundled Python from backend runtime
 REM 2. System Python
 
-set "BUNDLED_PYTHON=%~dp0..\backend\runtime\python_for_windows\python.exe"
+set BUNDLED_PYTHON=%~dp0..\backend\runtime\python_for_windows\python.exe
 
 if exist "%BUNDLED_PYTHON%" (
     set PYTHON_CMD="%BUNDLED_PYTHON%"
@@ -38,8 +38,12 @@ exit /b 1
 
 :findport
 REM Read the backend port from server_connection.json
-set "CONFIG_FILE=%~dp0..\server_connection.json"
 
+set "CONFIG_FILE=%~dp0..\server_connection.json"
+if not exist "%CONFIG_FILE%" (
+    REM Also check inside backend folder
+    set "CONFIG_FILE=%~dp0..\server_connection.json"
+)
 if not exist "%CONFIG_FILE%" (
     echo [WARNING] server_connection.json not found!
     echo [WARNING] Make sure the backend is running first!
@@ -47,7 +51,7 @@ if not exist "%CONFIG_FILE%" (
     set BACKEND_PORT=8000
     set BACKEND_IP=127.0.0.1
 ) else (
-    echo [INFO] Reading backend connection from %CONFIG_FILE%
+    echo [INFO] Reading backend connection from "%CONFIG_FILE%"
     for /f "tokens=2 delims=:, " %%a in ('findstr "PORT" "%CONFIG_FILE%"') do set BACKEND_PORT=%%a
     for /f "tokens=2 delims=:, " %%a in ('findstr "SERVER_IP" "%CONFIG_FILE%"') do (
         set BACKEND_IP=%%~a
