@@ -22,28 +22,30 @@ const scanPort = async (port: number): Promise<string | null> => {
     const timeoutId = setTimeout(() => controller.abort(), 200); 
     
     // Check openapi.json to confirm it's our backend (fastest check and avoids 404s)
+    console.debug(`[API] Scanning ${url}...`);
     const response = await fetch(`${url}/openapi.json`, { 
-      method: 'HEAD', 
+      method: 'GET', // Changed to GET for better compatibility
       signal: controller.signal 
     });
     clearTimeout(timeoutId);
     
     if (response.ok) {
-      console.log(`[API] Found backend at port ${port}`);
+      console.log(`[API] SUCCESS: Found backend at port ${port}`);
       return url;
     }
   } catch (e) {
-    // Ignore connection refused
+    // Ignore connection refused or timeout
+    // console.debug(`[API] Failed scan on ${port}:`, e);
   }
   return null;
 };
 
 // Start scanning common ports + dynamic range
 const findBackendUrl = async (): Promise<string> => {
-  console.log("[API] Scanning ports to find backend...");
+  console.log("[API] Starting Port Scanner to find backend...");
   
   // 1. Check fixed/common ports first
-  const commonPorts = [8000, 8001, 8080, 3000, 5000];
+  const commonPorts = [8000, 8001, 8080, 5000, 3000];
   for (const port of commonPorts) {
     const found = await scanPort(port);
     if (found) return found;
@@ -66,7 +68,7 @@ const findBackendUrl = async (): Promise<string> => {
     if (found) return found;
   }
 
-  console.warn("[API] Backend not found after scanning. Defaulting to 8000.");
+  console.error("[API] CRITICAL: Backend not found after scanning. Defaulting to 8000.");
   return 'http://localhost:8000';
 };
 
@@ -74,46 +76,58 @@ const findBackendUrl = async (): Promise<string> => {
 let cachedConfig: { API_BASE_URL: string } | null = null;
 
 const getConfig = async (): Promise<{ API_BASE_URL: string }> => {
-  if (cachedConfig) return cachedConfig;
+  if (cachedConfig) return cachedConfig; // Return cached result immediately
   
+  console.log("[API] getConfig called. Attempting to resolve backend URL...");
+
   // 1. Try server_connection.json (User Requested Method)
   // We try multiple paths since we don't know where the web server root is relative to the file.
   const potentialPaths = [
     '/server_connection.json', 
     '/backend/server_connection.json',
-    '../server_connection.json' 
+    '../server_connection.json',
+    '../../server_connection.json' // Added extra depth
   ];
 
   for (const path of potentialPaths) {
     try {
+      console.log(`[API] Trying to fetch config from: ${path}`);
       const response = await fetch(path);
       if (response.ok) {
         const data = await response.json();
+        console.log(`[API] Successfully read ${path}:`, data);
         // data structure: { SERVER_IP: "...", PORT: ... }
         if (data.SERVER_IP && data.PORT) {
           const url = `http://${data.SERVER_IP}:${data.PORT}`;
-          console.log(`[API] Found config at ${path}:`, url);
+          console.log(`[API] CONNECTED via ${path}:`, url);
           cachedConfig = { API_BASE_URL: url };
           return cachedConfig;
         }
+      } else {
+        console.warn(`[API] Failed to fetch ${path}: ${response.status} ${response.statusText}`);
       }
     } catch (e) {
-      // Ignore fetch errors
+      console.warn(`[API] Network error fetching ${path}:`, e);
     }
   }
 
   // 2. Try config.json (Legacy/Backup)
   try {
+    console.log("[API] Trying /config.json...");
     const response = await fetch('/config.json');
     if (response.ok) {
       cachedConfig = await response.json();
+      console.log("[API] CONNECTED via /config.json:", cachedConfig);
       return cachedConfig!;
+    } else {
+        console.warn(`[API] Failed /config.json: ${response.status}`);
     }
   } catch (error) {
-    // Fallthrough
+    console.warn("[API] Network error fetching /config.json:", error);
   }
 
   // 3. Fallback: Scan ports
+  console.log("[API] All config files failed. Initiating Port Scan...");
   const foundUrl = await findBackendUrl();
   cachedConfig = { API_BASE_URL: foundUrl };
   return cachedConfig;
