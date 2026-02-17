@@ -189,11 +189,24 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     asset.name.match(/\.(jpg|jpeg|png|gif|webp|bmp|svg|ico|tiff|tif|tga)$/i)
   );
 
+  // Fix: Use ref to prevent double-fetching on re-renders
+  const hasFetchedRef = useRef(false);
+
+  // Reset ref when asset changes
+  useEffect(() => {
+    hasFetchedRef.current = false;
+    setPreviewUrl(null);
+    setIsLoadingPreview(false);
+    setHasError(false);
+  }, [asset.id]);
+
   useEffect(() => {
     let active = true;
 
-    if (isVisible && isImage && !previewUrl && !isLoadingPreview && !hasError) {
+    if (isVisible && isImage && !hasFetchedRef.current && !previewUrl && !isLoadingPreview && !hasError) {
+      hasFetchedRef.current = true; // Mark as fetched
       setIsLoadingPreview(true);
+      
       // Use asset directly without 'as any' - interface has optional fields
       const host_ip = asset.host_ip || "";
       const shared_folder_name = asset.shared_folder_name || "";
@@ -224,7 +237,7 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
     return () => {
       active = false;
     };
-  }, [isVisible, isImage, asset, previewUrl, isLoadingPreview, hasError]);
+  }, [isVisible, isImage, asset.id]); // Fix: removed 'asset', 'previewUrl', 'isLoadingPreview', 'hasError' to prevent loop
 
   // Cleanup object URL
   useEffect(() => {
@@ -287,7 +300,7 @@ const AssetCard = ({ asset, onClick, onDownload }: AssetCardProps) => {
            // While loading or waiting to load
            <div style={placeholderStyles}>
              {isLoadingPreview ? (
-                 <Loader2 className="animate-spin" size={24} />
+                 <Loader2 size={24} style={{ animation: 'spin 1s linear infinite' }} />
              ) : (
                  <ImageIcon size={32} />
              )}

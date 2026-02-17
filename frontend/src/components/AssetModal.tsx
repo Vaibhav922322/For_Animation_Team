@@ -303,7 +303,7 @@ const AssetModal = ({ asset, isOpen, onClose, onDownload }: AssetModalProps) => 
               ) : (
                 <div style={placeholderStyles(getTypeColor(asset.type))}>
                   {isLoadingPreview ? (
-                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900">Attributes...</div> // Simple loading text or spinner
+                     <div style={{ width: 32, height: 32, border: '3px solid #e5e7eb', borderTopColor: '#3b82f6', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
                   ) : (
                     <>
                       {getFileIcon(asset.type, 64)}
