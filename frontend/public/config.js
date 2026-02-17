@@ -1,3 +1,3 @@
 window.env = {
-  API_BASE_URL: "http://localhost:8000",
+  API_BASE_URL: null, // Default to null to force dynamic discovery
 };

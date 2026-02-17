@@ -68,8 +68,10 @@ const findBackendUrl = async (): Promise<string> => {
     if (found) return found;
   }
 
-  console.error("[API] CRITICAL: Backend not found after scanning. Defaulting to 8000.");
-  return 'http://localhost:8000';
+  console.error("[API] CRITICAL: Backend not found after scanning.");
+  // Default to relative path instead of 8000 to avoid confusion.
+  // Or throw an error so the app knows it failed.
+  throw new Error("Backend not found on any port.");
 };
 
 // Runtime configuration fetcher with Scanner and server_connection.json support
