@@ -313,14 +313,14 @@ function App() {
     handleNavigate(newPath);
   };
 
-  const showResults = assets.length > 0 || isLoading;
+  const showResults = assets.length > 0 || isLoading || currentPath !== '/';
 
   return (
     <>
-      {/* Download Overlay */}
+      {/* ... overlays ... */}
       <DownloadOverlay isVisible={isDownloading} progress={downloadProgress} />
-      {/* Refresh Overlay */}
       <RefreshOverlay isVisible={isRefreshing} />
+      
       {/* Antigravity Background */}
       <div style={backgroundStyles}>
         <Antigravity
@@ -345,6 +345,7 @@ function App() {
       {/* Main Content */}
       <div style={pageContainerStyles}>
         <div style={topSectionStyles}>
+          {/* ... top section (search/header) ... */}
           <div style={overlayStyles} />
           <div style={contentStyles}>
             <SplitText
@@ -390,65 +391,71 @@ function App() {
 
           </div>
         </div>
+        
         <div style={bottomSectionStyles}>
           {error && <div style={errorStyles}>{error}</div>}
+
+          {/* Breadcrumbs - Moved OUTSIDE showResults to be always visible */}
+          {!searchQuery && (
+            <div style={{ width: "100%", maxWidth: "1200px", display: "flex", alignItems: "center", gap: "8px", padding: "0 0 24px 0", color: "#4b5563", fontSize: "0.9rem" }}>
+              {/* Back Button */}
+              <button
+                 onClick={handleBack}
+                 disabled={currentPath === "/"}
+                 style={{
+                   display: "flex",
+                   alignItems: "center",
+                   justifyContent: "center",
+                   padding: "8px",
+                   marginRight: "8px",
+                   borderRadius: "8px",
+                   border: "1px solid #e5e7eb",
+                   backgroundColor: currentPath === "/" ? "#f3f4f6" : "#ffffff",
+                   color: currentPath === "/" ? "#9ca3af" : "#4b5563",
+                   cursor: currentPath === "/" ? "default" : "pointer",
+                   transition: "all 0.2s"
+                 }}
+                 title="Go Back"
+              >
+                <ArrowLeft size={16} />
+              </button>
+  
+              <div 
+                style={{ display: "flex", alignItems: "center", cursor: "pointer", color: currentPath === "/" ? "#1e293b" : "#6b7280" }}
+                onClick={() => handleNavigate("/")}
+              >
+                <Home size={16} />
+              </div>
+              {currentPath !== "/" && currentPath.split("/").filter(Boolean).map((segment, index, array) => {
+                const path = "/" + array.slice(0, index + 1).join("/");
+                const isLast = index === array.length - 1;
+                return (
+                  <div key={path} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <ChevronRight size={14} color="#9ca3af" />
+                    <span 
+                      style={{ 
+                        cursor: isLast ? "default" : "pointer", 
+                        fontWeight: isLast ? 600 : 400,
+                        color: isLast ? "#1e293b" : "#6b7280"
+                      }}
+                      onClick={() => !isLast && handleNavigate(path)}
+                    >
+                      {segment}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           {showResults ? (
             <>
               <h2 style={resultsTitleStyles}>
                 {searchQuery ? "Results for \"" + searchQuery + "\"" : "Browse Assets"}
               </h2>
-             {/* Breadcrumbs */}
-        {!searchQuery && (
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "16px 24px", color: "#4b5563", fontSize: "0.9rem" }}>
-            {/* Back Button */}
-            <button
-               onClick={handleBack}
-               disabled={currentPath === "/"}
-               style={{
-                 display: "flex",
-                 alignItems: "center",
-                 justifyContent: "center",
-                 padding: "8px",
-                 marginRight: "8px",
-                 borderRadius: "8px",
-                 border: "1px solid #e5e7eb",
-                 backgroundColor: currentPath === "/" ? "#f3f4f6" : "#ffffff",
-                 color: currentPath === "/" ? "#9ca3af" : "#4b5563",
-                 cursor: currentPath === "/" ? "default" : "pointer",
-                 transition: "all 0.2s"
-               }}
-               title="Go Back"
-            >
-              <ArrowLeft size={16} />
-            </button>
+              
+              {/* Breadcrumbs Removed from here */}
 
-            <div 
-              style={{ display: "flex", alignItems: "center", cursor: "pointer", color: currentPath === "/" ? "#1e293b" : "#6b7280" }}
-              onClick={() => handleNavigate("/")}
-            >
-              <Home size={16} />
-            </div>
-            {currentPath !== "/" && currentPath.split("/").filter(Boolean).map((segment, index, array) => {
-              const path = "/" + array.slice(0, index + 1).join("/");
-              const isLast = index === array.length - 1;
-              return (
-                <div key={path} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <ChevronRight size={14} color="#9ca3af" />
-                  <span 
-                    style={{ 
-                      cursor: isLast ? "default" : "pointer", 
-                      fontWeight: isLast ? 600 : 400,
-                      color: isLast ? "#1e293b" : "#6b7280"
-                    }}
-                    onClick={() => !isLast && handleNavigate(path)}
-                  >
-                    {segment}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
 
         {/* Filters */}
               <FilterBar
