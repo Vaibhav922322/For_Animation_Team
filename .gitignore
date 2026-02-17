@@ -5,6 +5,7 @@ frontend/next.config.ts
 frontend/postcss.config.mjs
 frontend\.next
 frontend/tsconfig.json
+frontend/dist/config.js
 
 # for backend
 **\server_connection.json

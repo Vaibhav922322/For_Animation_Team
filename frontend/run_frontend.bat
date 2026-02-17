@@ -66,6 +66,12 @@ REM Generate config.js with the backend URL
 echo window.__CONFIG__ = { API_URL: "http://%BACKEND_IP%:%BACKEND_PORT%" }; > "%~dp0dist\config.js"
 echo [INFO] Generated config.js with API_URL = http://%BACKEND_IP%:%BACKEND_PORT%
 
+REM Copy server_connection.json into dist/ so the frontend can fetch it
+if exist "%CONFIG_FILE%" (
+    copy /Y "%CONFIG_FILE%" "%~dp0dist\server_connection.json" >nul
+    echo [INFO] Copied server_connection.json into dist/
+)
+
 echo [INFO] Serving frontend on http://localhost:5173
 echo.
 echo Press Ctrl+C to stop the server.
