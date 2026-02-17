@@ -70,13 +70,39 @@ const findBackendUrl = async (): Promise<string> => {
   return 'http://localhost:8000';
 };
 
-// Runtime configuration fetcher with Scanner
+// Runtime configuration fetcher with Scanner and server_connection.json support
 let cachedConfig: { API_BASE_URL: string } | null = null;
 
 const getConfig = async (): Promise<{ API_BASE_URL: string }> => {
   if (cachedConfig) return cachedConfig;
   
-  // Try config.json first (if generated)
+  // 1. Try server_connection.json (User Requested Method)
+  // We try multiple paths since we don't know where the web server root is relative to the file.
+  const potentialPaths = [
+    '/server_connection.json', 
+    '/backend/server_connection.json',
+    '../server_connection.json' 
+  ];
+
+  for (const path of potentialPaths) {
+    try {
+      const response = await fetch(path);
+      if (response.ok) {
+        const data = await response.json();
+        // data structure: { SERVER_IP: "...", PORT: ... }
+        if (data.SERVER_IP && data.PORT) {
+          const url = `http://${data.SERVER_IP}:${data.PORT}`;
+          console.log(`[API] Found config at ${path}:`, url);
+          cachedConfig = { API_BASE_URL: url };
+          return cachedConfig;
+        }
+      }
+    } catch (e) {
+      // Ignore fetch errors
+    }
+  }
+
+  // 2. Try config.json (Legacy/Backup)
   try {
     const response = await fetch('/config.json');
     if (response.ok) {
@@ -84,10 +110,10 @@ const getConfig = async (): Promise<{ API_BASE_URL: string }> => {
       return cachedConfig!;
     }
   } catch (error) {
-    // Fallthrough to scan
+    // Fallthrough
   }
 
-  // If no config, scan ports
+  // 3. Fallback: Scan ports
   const foundUrl = await findBackendUrl();
   cachedConfig = { API_BASE_URL: foundUrl };
   return cachedConfig;
