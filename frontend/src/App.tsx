@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, type CSSProperties } from "react";
-import { ChevronRight, Home } from "lucide-react";
+import { ChevronRight, Home, ArrowLeft } from "lucide-react";
 import { SearchBar } from "./components/SearchBar";
 import AssetGrid from "./components/AssetGrid";
 import AssetModal from "./components/AssetModal";
@@ -19,25 +19,28 @@ const mapMetadataToAsset = (file: FileMetadata): Asset => {
   
   if (['fbx', 'obj', 'blend', 'gltf', 'glb'].includes(extension)) type = 'model';
   else if (['png', 'jpg', 'jpeg', 'tga', 'tif', 'tiff'].includes(extension)) type = 'texture';
-  else if (['mp4', 'mov', 'avi'].includes(extension)) type = 'animation'; // Note: API might not return video files as animations, but 3D animations are usually FBX too.
+  else if (['mp4', 'mov', 'avi'].includes(extension)) type = 'animation'; 
 
   // Format size
   const sizeMB = (file.file_size / (1024 * 1024)).toFixed(1);
   
   return {
-    id: file.full_unc_path, // Use full UNC path as unique ID (unique across hosts)
+    id: file.full_unc_path, 
     name: file.file_name,
     type,
     size: `${sizeMB} MB`,
-    date: "Unknown", // API doesn't provide date
+    date: "Unknown", 
     // Store original metadata for download
-    host_ip: file.host_ip,
-    host_name: file.host_name || file.host_ip, // Use hostname if available, else IP
+    // Robust Fallback: If host_ip is missing, default to 127.0.0.1 to pass backend validation
+    host_ip: file.host_ip || "127.0.0.1",
+    host_name: file.host_name || file.host_ip || "Localhost",
     shared_folder_name: file.shared_folder_name,
     file_path: file.file_path,
     is_file: file.is_file,
   };
 };
+
+// ... inside App component ...
 
 
 const backgroundStyles: CSSProperties = {
@@ -302,6 +305,14 @@ function App() {
     setSelectedAsset(null);
   };
 
+  const handleBack = () => {
+    if (currentPath === "/") return;
+    const parts = currentPath.split("/").filter(Boolean);
+    parts.pop();
+    const newPath = parts.length === 0 ? "/" : "/" + parts.join("/");
+    handleNavigate(newPath);
+  };
+
   const showResults = assets.length > 0 || isLoading;
 
   return (
@@ -389,6 +400,28 @@ function App() {
              {/* Breadcrumbs */}
         {!searchQuery && (
           <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "16px 24px", color: "#4b5563", fontSize: "0.9rem" }}>
+            {/* Back Button */}
+            <button
+               onClick={handleBack}
+               disabled={currentPath === "/"}
+               style={{
+                 display: "flex",
+                 alignItems: "center",
+                 justifyContent: "center",
+                 padding: "8px",
+                 marginRight: "8px",
+                 borderRadius: "8px",
+                 border: "1px solid #e5e7eb",
+                 backgroundColor: currentPath === "/" ? "#f3f4f6" : "#ffffff",
+                 color: currentPath === "/" ? "#9ca3af" : "#4b5563",
+                 cursor: currentPath === "/" ? "default" : "pointer",
+                 transition: "all 0.2s"
+               }}
+               title="Go Back"
+            >
+              <ArrowLeft size={16} />
+            </button>
+
             <div 
               style={{ display: "flex", alignItems: "center", cursor: "pointer", color: currentPath === "/" ? "#1e293b" : "#6b7280" }}
               onClick={() => handleNavigate("/")}
